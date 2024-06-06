@@ -32,8 +32,8 @@ onUnmounted(() => {
 <style scoped>
 .jump-button {
 	position: fixed;
-	right: 20px;
-	bottom: 20px;
+	right: 25px;
+	bottom: 25px;
 	width: 60px;
 	height: 60px;
 	border: none;
