@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container" ref="welcomeSectionRef">
 		<ExpandablePolaroidStack ref="polaroidStack" stackName="testname" :polaroids="polaroids">
 			<template v-slot:text>
 				<div class="intro-text">
@@ -21,6 +21,8 @@
 						Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 					</p>
 
+					<span id="">This is the <span id="human">human</span> text to be annotated.</span>
+
 					<Button v-on:click="toggleGallery" color="orange" text="Show Gallery"
 							style="margin-top: 20px; margin-bottom: 20px" />
 				</div>
@@ -29,6 +31,7 @@
 
 
 		<Risographic />
+		<JumpTopButton />
 	</div>
 </template>
 
@@ -41,6 +44,9 @@ useHead({
 		lang: 'en'
 	}
 });
+const welcomeSectionRef = ref(null);
+
+useAnnotate('human');
 
 const polaroidStack = ref<HTMLElement | null>(null);
 
