@@ -1,0 +1,18 @@
+:root {
+	--dynamic-bg-color: #FF5A5A;
+	--blue-color: #4183FF;
+	--pink-color: #F870FF;
+	--orange-color: #FE9C00;
+	--yellow-color: #FEEA00;
+	--green-color: #009C34;
+	--red-color: #FF5A5A;
+	--red-color-transparent: #FF5A5Aaa;
+
+	--error-color: #FF5A5A;
+	--grey-color: #505050;
+	--light-grey-color: #dadada;
+	--white-color: #ffffff;
+	--black-color: #000;
+
+	--pen-color: #000F55
+}
