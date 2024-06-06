@@ -1,10 +1,12 @@
 <template>
-	<button v-show="showButton" aria-label="Scroll to top button" @click="scrollToTop" class="jump-button">
-		<span class="icon"></span>
-	</button>
+	<transition name="fade">
+		<button v-show="showButton" aria-label="Scroll to top button" @click="scrollToTop" class="jump-button">
+			<span class="icon"></span>
+		</button>
+	</transition>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const showButton = ref(false);
@@ -42,10 +44,23 @@ onUnmounted(() => {
 	box-shadow: 0px 0px 30px 0px #00000030;
 	cursor: pointer;
 	outline: none;
-	transition: 150ms all ease-in-out;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	transition: 150ms box-shadow ease-in-out;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.25s;
+}
+
+.fade-enter,
+.fade-leave-to
+
+/* .fade-leave-active in <2.1.8 */
+	{
+	opacity: 0;
 }
 
 .jump-button:hover {
@@ -83,7 +98,6 @@ onUnmounted(() => {
 .jump-button:hover .icon::after {
 	opacity: 1;
 }
-
 
 @media (max-width: 1000px) {
 	.jump-button {
