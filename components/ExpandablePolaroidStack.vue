@@ -44,14 +44,15 @@ const props = defineProps<{
 
 props.polaroids;
 
+// states
 const showText = ref(true); // hide text part if expanded
 const expanded = ref(false);
+const isVisible = ref(true)
 
 // references
 const listRef = ref<HTMLElement | null>(null);
 
 const windowWidth = ref(0);
-const isVisible = ref(true)
 onMounted(() => {
 
 	windowWidth.value = window.innerWidth;
@@ -144,7 +145,6 @@ function cardStyling(index: number) {
 }
 
 
-
 .welcome-text-area {
 	position: relative;
 	overflow: hidden;
@@ -158,6 +158,7 @@ function cardStyling(index: number) {
 	max-width: 550px;
 	min-width: 550px;
 	text-align: justify;
+	padding-left: 20px;
 }
 
 @media screen and (max-width: 1000px) {

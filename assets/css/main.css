@@ -16,3 +16,23 @@
 
 	--pen-color: #000F55
 }
+
+body,
+html {
+	font-family: 'Hanken Grotesk' !important;
+	line-height: 24px;
+	font-size: 17px;
+	position: relative;
+	background-color: white;
+	padding: 0px!important; 
+	margin: 0px!important;
+
+	width: 100%;
+}
+
+
+h1 {
+	color: var(--pen-color);
+	font-family: 'biro_script_standardregular';
+	font-size: 36px !important;
+}
