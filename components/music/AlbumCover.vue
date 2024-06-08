@@ -53,8 +53,8 @@ const tiltableCoverRef = ref<any>(null)
 
 onMounted(() => {
 	VanillaTilt.init(tiltableCoverRef.value, {
-		max: 15,
-		speed: 150,
+		max: 20,
+		speed: 500,
 		reverse: true,
 
 		glare: true,
