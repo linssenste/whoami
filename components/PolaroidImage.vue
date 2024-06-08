@@ -1,7 +1,8 @@
 <template>
 
 	<div class="polaroid-image" ref="polaroidRef">
-		<img :src="src" width="100%" height="100%" :alt="alt" data-testid="image" draggable="false" />
+		<img :src="src" width="100%" height="100%" :alt="alt" data-testid="image" draggable="false"
+			 onerror="this.src='/polaroids/polaroid-error.webp'" data-not-lazy />
 	</div>
 
 </template>
