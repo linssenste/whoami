@@ -1,6 +1,6 @@
 <template>
 	<div class="art-image-container" ref="imageContainerRef">
-		<img data-not-lazy data-testid="risograph-image" fetchpriority="high" preload height="100%"
+		<img data-not-lazy data-testid="risograph-image" height="100%"
 			 alt="colorful rounded forms in risographic style with the letter S and L in the center"
 			 src="../assets/images/risograph.svg" class="art-image" />
 	</div>
@@ -14,7 +14,7 @@ const imageContainerRef = ref<HTMLElement | null>(null);
 const handleScroll = () => {
 	if (!imageContainerRef.value) return
 
-	imageContainerRef.value.style.transform = `translateY(-${window.scrollY * 0.075}px)`;
+	imageContainerRef.value.style.transform = `translateY(-${window.scrollY * 0.1}px)`;
 };
 
 onMounted(() => {
@@ -29,7 +29,9 @@ onUnmounted(() => {
 
 <style scoped>
 .art-image-container {
+	z-index: 0;
 	display: flex;
+	background-color: transparent;
 	justify-content: center;
 	align-items: center;
 	min-width: 1000px;
@@ -39,7 +41,7 @@ onUnmounted(() => {
 }
 
 .art-image {
-	z-index: -1;
+	z-index: 0;
 	opacity: 1;
 	transition: transform 0.2s ease-out;
 	width: 100%;
