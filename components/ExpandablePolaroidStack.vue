@@ -14,9 +14,13 @@
 			<li class="polaroid append-slot" :style="cardStyling(polaroids.length)"
 				:class="!expanded ? 'append-slot-hidden' : ''" data-testid="close-button-card">
 
-				<button v-on:click="toggleExpansion" data-testid="close-button">
-					<img src="../assets/icons/chevron-left.svg" alt="chevron left" title="Close polaroid stack"
-						 width="16" height="16" /></button>
+				<button v-on:click="toggleExpansion" data-testid="close-button" class="close-button">
+					<!-- <img src="../assets/icons/chevron-left.svg" alt="chevron left" title="Close polaroid stack"
+						 width="16" height="16" /> -->
+					<div class="chevron-icon">
+						<ChevronArrowIcon :size="10" />
+					</div>
+				</button>
 			</li>
 		</ul>
 
@@ -239,10 +243,11 @@ ul.polaroids-list li.polaroid {
 	padding-top: 10px
 }
 
-.append-slot button {
+.close-button {
 	background-color: #e0e0e0;
 	border-radius: 10px;
 
+	position: relative;
 	outline: none;
 	border: none;
 	height: 100px;
@@ -252,11 +257,14 @@ ul.polaroids-list li.polaroid {
 	transition: all 200ms ease-in-out;
 }
 
-.append-slot button:hover {
+.close-button:hover {
 	height: 400px;
 	opacity: 1;
 }
 
+.close-button .chevron-icon {
+	transform: rotate(-90deg) translateX(10px)
+}
 
 .append-slot-hidden {
 	width: 0px !important;

@@ -93,7 +93,7 @@ button.action-btn .circle .icon.arrow {
 button.action-btn .circle .icon.arrow::before {
 	position: absolute;
 	content: '';
-	top: -0.25rem;
+	top: -0.29rem;
 	right: 0.0625rem;
 	width: 0.625rem;
 	height: 0.625rem;

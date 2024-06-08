@@ -1,7 +1,7 @@
 <template>
 	<transition name="fade">
 		<button v-show="showButton" aria-label="Scroll to top button" @click="scrollToTop" class="jump-button">
-			<span class="icon"></span>
+			<ChevronArrowIcon :size="10" :rotation="90" color="#505050" />
 		</button>
 	</transition>
 </template>
@@ -32,6 +32,7 @@ onUnmounted(() => {
 <style scoped>
 .jump-button {
 	position: fixed;
+	z-index: 1000;
 	right: 25px;
 	bottom: 25px;
 	width: 60px;
@@ -56,10 +57,7 @@ onUnmounted(() => {
 }
 
 .fade-enter,
-.fade-leave-to
-
-/* .fade-leave-active in <2.1.8 */
-	{
+.fade-leave-to {
 	opacity: 0;
 }
 
@@ -67,37 +65,6 @@ onUnmounted(() => {
 	box-shadow: 0px 0px 30px 0px #00000050;
 }
 
-.icon {
-	position: relative;
-	width: 12px;
-	height: 12px;
-	border-left: 3px solid #000;
-	border-top: 3px solid #000;
-	transform: translateY(2px) rotate(45deg);
-	transition: transform 250ms ease-in-out;
-}
-
-.jump-button:hover .icon {
-	transform: translateY(-4px) rotate(45deg);
-}
-
-.jump-button .icon::after {
-	content: '';
-	position: absolute;
-	top: 5px;
-	left: -7px;
-	width: 3px;
-	height: 3px;
-	border-right: 24px solid #000;
-	transform: rotate(45deg);
-	opacity: 0;
-	transition-delay: 50ms;
-	transition: opacity 250ms ease-in-out;
-}
-
-.jump-button:hover .icon::after {
-	opacity: 1;
-}
 
 @media (max-width: 1000px) {
 	.jump-button {
