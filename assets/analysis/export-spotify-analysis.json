@@ -1,1 +1,104 @@
-{"update_time": 1717545720, "stats": {"albums": 331, "tracks": 999, "artists": 156, "duration": 3545.4401666666668}, "genres": {"general": {"alternative": 685, "hip hop/rap": 659, "pop": 274, "other": 179, "rock": 148, "indie": 147, "electronic": 48, "edm": 21, "comedy": 18, "punk": 11, "singer-songwriter": 10, "ambient": 9, "experimental": 7, "new wave": 7, "jazz": 6, "soul/r&b": 5, "grunge": 5, "folk": 5, "metal": 2}, "detailed": {"german pop": 268, "german indie": 210, "german hip hop": 158, "german alternative rap": 129, "pop": 91, "antideutsche": 68, "swiss indie": 60, "rap": 56, "hip hop": 55, "german singer-songwriter": 55}}, "features": {"danceability": 0.6172447342026072, "energy": 0.61674558676028, "key": 5.329989969909729, "loudness": -7.711891675025074, "mode": 0.5586760280842528, "speechiness": 0.13751915747241714, "acousticness": 0.2970779018054159, "instrumentalness": 0.038366719598796374, "liveness": 0.20638766298896702, "valence": 0.47239087261785406, "tempo": 120.0154162487463}, "artists": {"0k70gnDBLPirCltbTzoxuM": {"img": "https://i.scdn.co/image/ab6761610000e5ebad25a4c036cdc21fe95986ad", "tracks": 35, "albums": 7, "name": "Faber", "occurrence": "3.50"}, "23xqmJEN3oVxwzqtNIyR5m": {"img": "https://i.scdn.co/image/ab6761610000e5ebbcf79c131f4ddb3635dd60bb", "tracks": 28, "albums": 6, "name": "AnnenMayKantereit", "occurrence": "2.80"}, "5fNCrHCBzuRdM8AbVajVh0": {"img": "https://i.scdn.co/image/ab6761610000e5eb45a6963fbc20ede928638715", "tracks": 25, "albums": 7, "name": "Lance Butters", "occurrence": "2.50"}, "2XbRunIT35jrB8HRsISPgT": {"img": "https://i.scdn.co/image/ab6761610000e5eb65e8d02a37ce4b2371caf085", "tracks": 25, "albums": 6, "name": "Tristan Brusch", "occurrence": "2.50"}, "0r0R5nIjDY04TfxRM10Bcb": {"img": "https://i.scdn.co/image/ab6761610000e5eb489fdf3f409eed0c27751c64", "tracks": 25, "albums": 5, "name": "Alligatoah", "occurrence": "2.50"}}, "decades": {"1960": 5, "1970": 9, "1980": 7, "1990": 18, "2000": 38, "2010": 459, "2020": 461}}
+{
+	"update_time": 1717941377,
+	"stats": {
+		"albums": 577,
+		"tracks": 1444,
+		"artists": 262,
+		"duration": 5188.459283333334
+	},
+	"genres": {
+		"general": {
+			"hip hop/rap": 816,
+			"pop": 757,
+			"alternative": 653,
+			"rock": 328,
+			"other": 305,
+			"indie": 236,
+			"electronic": 95,
+			"soul/r&b": 44,
+			"singer-songwriter": 36,
+			"edm": 28,
+			"comedy": 18,
+			"punk": 16,
+			"folk": 13,
+			"ambient": 9,
+			"new wave": 8,
+			"country": 8,
+			"jazz": 7,
+			"experimental": 7,
+			"grunge": 6,
+			"metal": 5
+		},
+		"detailed": {
+			"pop": 319,
+			"german pop": 246,
+			"german indie": 215,
+			"german hip hop": 145,
+			"german alternative rap": 120,
+			"rap": 104,
+			"hip hop": 92,
+			"rock": 90,
+			"modern rock": 80,
+			"swiss indie": 67
+		}
+	},
+	"features": {
+		"danceability": 0.6118545706371185,
+		"energy": 0.6155241343490302,
+		"key": 5.252077562326869,
+		"loudness": -7.577324792243759,
+		"mode": 0.582409972299169,
+		"speechiness": 0.11646710526315783,
+		"acousticness": 0.29250865754847677,
+		"instrumentalness": 0.03868699391966761,
+		"liveness": 0.19819355955678736,
+		"valence": 0.4623187673130194,
+		"tempo": 120.4133414127424
+	},
+	"artists": {
+		"06HL4z0CvFAxyc27GXpf02": {
+			"img": "e672b5f553298dcdccb0e676",
+			"tracks": 46,
+			"albums": 15,
+			"name": "Taylor Swift",
+			"occurrence": "3.19"
+		},
+		"0k70gnDBLPirCltbTzoxuM": {
+			"img": "ad25a4c036cdc21fe95986ad",
+			"tracks": 42,
+			"albums": 8,
+			"name": "Faber",
+			"occurrence": "2.91"
+		},
+		"73sIBHcqh3Z3NyqHKZ7FOL": {
+			"img": "3ef779aa0d271adb2b6a3ded",
+			"tracks": 29,
+			"albums": 8,
+			"name": "Childish Gambino",
+			"occurrence": "2.01"
+		},
+		"2feDdbD5araYcm6JhFHHw7": {
+			"img": "7885d725841e0338092f5f6f",
+			"tracks": 29,
+			"albums": 11,
+			"name": "Labrinth",
+			"occurrence": "2.01"
+		},
+		"7dGJo4pcD2V6oG8kP0tJRR": {
+			"img": "a00b11c129b27a88fc72f36b",
+			"tracks": 24,
+			"albums": 11,
+			"name": "Eminem",
+			"occurrence": "1.66"
+		}
+	},
+	"decades": {
+		"1960": 7,
+		"1970": 15,
+		"1980": 13,
+		"1990": 30,
+		"2000": 92,
+		"2010": 642,
+		"2020": 645
+	}
+}
