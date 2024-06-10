@@ -3,7 +3,7 @@ name: Run Jupyter Notebook
 on:
   push:
     paths:
-      - "/assets/analysis/spotify.ipynb" # Runs on push to specific notebook
+      - "assets/analysis/spotify_analysis.ipynb" # Runs on push to specific notebook
   schedule:
     - cron: "0 0 * * *" # Runs at 00:00 UTC every day
 
