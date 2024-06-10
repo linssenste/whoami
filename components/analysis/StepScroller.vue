@@ -118,7 +118,9 @@ const handleScroll = () => {
 }
 
 .scrollable-content .content {
-	width: 100%;
+
+	width: calc(100% - 50px);
+	padding: 25px;
 	transition: opacity 150ms ease-in-out;
 }
 
