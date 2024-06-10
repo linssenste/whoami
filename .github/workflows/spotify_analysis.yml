@@ -1,0 +1,43 @@
+name: Run Jupyter Notebook
+
+on:
+  push:
+    paths:
+      - "assets/analysis/spotify.ipynb" # Runs on push to specific notebook
+  schedule:
+    - cron: "0 0 * * *" # Runs at 00:00 UTC every day
+
+jobs:
+  run-notebook:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9" # Adjust this to match the Python version you use
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install notebook requests numpy pandas matplotlib
+
+      - name: Execute Jupyter Notebook
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          PLAYLIST_ID: ${{ secrets.PLAYLIST_ID }}
+        run: |
+          jupyter nbconvert --execute --inplace --to notebook spotify_analysis_script.ipynb
+
+      - name: Commit and Push if changes are present
+        run: |
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git add src/assets/analysis/export-spotify-covers.json src/assets/analysis/export-spotify-analysis.json  # Add the JSON file at the specified path
+          git status  # Optional, for debugging to see what changes are being committed
+          git commit -m "Updated notebook and JSON output in src/assets/analysis" || echo "No changes to commit"
+          git push
