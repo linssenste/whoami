@@ -1,5 +1,5 @@
 <template>
-	<div class="cover-area">
+	<div class="cover-area" oncontextmenu="return false">
 		<!-- mouse tilt area -->
 		<div ref="tiltableCoverRef" class="tilt-cover">
 
@@ -11,7 +11,7 @@
 			</div>
 
 			<!-- album cover image (lazy loaded) -->
-			<img draggable="false" class="cover-image" width="150" height="150" alt=""
+			<img draggable="false" class="cover-image" oncontextmenu="return false" width="150" height="150" alt=""
 				 v-on:mouseenter="setHoveringState(true)" v-on:mouseleave="setHoveringState(false)"
 				 :src="`https://i.scdn.co/image/ab67616d00001e02${src.cover}`" onerror="this.style.display='none'"
 				 v-lazy-load />
@@ -52,13 +52,15 @@ props.status;
 const tiltableCoverRef = ref<any>(null)
 
 onMounted(() => {
+	if (isTouchDevice.value) return;
+
 	VanillaTilt.init(tiltableCoverRef.value, {
 		max: 20,
 		speed: 500,
 		reverse: true,
 
 		glare: true,
-		gyroscope: false,
+		gyroscope: true,
 		"max-glare": .25,
 	})
 })
