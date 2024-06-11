@@ -1,6 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  app: {
+    head: {
+      script: [
+        {
+          src: 'https://open.spotify.com/embed/iframe-api/v1',
+          async: true
+        }
+      ]
+    }
+  },
   modules: [
 	'nuxt-lazy-load'
   ],
@@ -9,7 +19,7 @@ export default defineNuxtConfig({
 	images: true,
 	videos: true,
 	audios: true,
-	iframes: true,
+	iframes: false,
 	native: false,
 	directiveOnly: true,
   },
