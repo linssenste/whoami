@@ -49,6 +49,9 @@ const props = defineProps<{
 props.src;
 props.status;
 
+const { isTouchDevice } = useDeviceDetection();
+
+
 const tiltableCoverRef = ref<any>(null)
 
 onMounted(() => {

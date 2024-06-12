@@ -36,6 +36,8 @@ const emit = defineEmits(['track-selected']);
 const props = defineProps<{ isPlaying: boolean }>();
 props.isPlaying
 
+const { isTouchDevice } = useDeviceDetection();
+
 // randomizing the covers; changes the appearance of the banner each time
 const randomAlbumCovers = computed(() => {
 	return [...covers].sort(() => Math.random() - 0.5)

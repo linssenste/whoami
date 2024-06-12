@@ -20,6 +20,8 @@ const props = defineProps<{
 	id: string;
 }>();
 
+const { isMobile } = useDeviceDetection();
+
 const isTextSideLeft = computed(() => props.textSide === 'left');
 
 const textSideRef = ref<HTMLElement | null>(null);
