@@ -2,8 +2,11 @@
 	<div class="music-videos">
 		<div class="video-column" v-for="video in videos" :key="video.description">
 			<div class="video-border">
-				<video ref="videoPlayer" :id="video.id" controls :poster="video.thumbnail" :alt="video.description"
-					   height="534" width="300" style="border-radius: 12px" fetchpriority="high">
+				<video v-lazy-load height="534" :id="video.id" controls :poster="video.thumbnail"
+					   :alt="video.description" style="border-radius: 12px" fetchpriority="high">
+					<source v-for="(url, resolution) in video.src" :key="resolution"
+							:src="`https://firebasestorage.googleapis.com/v0/b/linssenweb.appspot.com/o/videos%2F${url}`"
+							:type="'video/mp4'" :data-resolution="resolution" />
 				</video>
 			</div>
 			<div class="video-description">
@@ -17,28 +20,39 @@
 	</div>
 </template>
 
+
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
-import Hls from 'hls.js';
+import { onMounted } from 'vue';
+
+
+
+
 
 const videos = [
 	{
 		id: 'slovenia-video',
-		src: '/videos/slovenia.m3u8',
-		description: 'Vacation in Slovenia',
-		thumbnail: '/videos/thumbnail-slovenia.webp',
-		trackId: '4zCVknIsuMpvBSBZA7N1rt'
+		src: {
+			// 360: 'slovenia%2Foutput_360.mp4?alt=media&token=68e03a8a-7afa-4271-9536-81b188287939',
+			// 480: 'slovenia%2Foutput_480.mp4?alt=media&token=93a89d69-2391-41eb-aff1-b4807ef30ab7',
+			720: 'slovenia%2Foutput_720.mp4?alt=media&token=60ab831e-bd64-4d92-a6b4-01bce4c02177',
+			// 1080: 'slovenia%2Foutput_1080.mp4?alt=media&token=986bd5c4-5999-4cf6-9970-c880f38e9834',
+			// 2160: 'slovenia%2Foutput_2160.mp4?alt=media&token=0bc38fcd-ef70-4089-999e-3b8f37aa94ce'
+
+		}, description: 'Vacation in Slovenia', thumbnail: '/videos/thumbnail-slovenia.webp', trackId: '4zCVknIsuMpvBSBZA7N1rt'
 	},
 	{
 		id: 'mountain-video',
-		src: '/videos/mountain.m3u8',
-		description: 'Morning in the mountain',
-		thumbnail: '/videos/thumbnail-mountain.webp',
-		trackId: '6potEImiklXkwD9qFzpu15'
+		src: {
+			// 360: 'mountain%2Foutput_360.mp4?alt=media&token=ce767816-876b-418f-81ba-2698d1a2f8f9',
+			// 480: 'mountain%2Foutput_480.mp4?alt=media&token=a3fce23f-c1d7-4827-a51b-277405308e58',
+			720: 'mountain%2Foutput_720.mp4?alt=media&token=d7292770-9f20-411e-a037-65f16d12707c',
+			// 1080: 'mountain%2Foutput_1080.mp4?alt=media&token=bf4abeb6-ba63-4b4f-9552-2f8efbd5fd7c',
+			// 2160: 'mountain%2Foutput_2160.mp4?alt=media&token=1e73bc74-568f-4dfb-a170-bad40f122124'
+		}, description: 'Morning in the mountain', thumbnail: '/videos/thumbnail-mountain.webp', trackId: '6potEImiklXkwD9qFzpu15'
 	}
-];
+]
 
-const emit = defineEmits(['play']);
+const emit = defineEmits(['play'])
 
 function openVideoMusic(trackId: string) {
 	emit('play', trackId);
@@ -56,65 +70,34 @@ const props = defineProps<{
 props.focus;
 
 watch(() => props.focus, () => {
-	const sloveniaVideo = document.getElementById('slovenia-video') as HTMLVideoElement;
-	const mountainVideo = document.getElementById('mountain-video') as HTMLVideoElement;
 
-	if (sloveniaVideo) sloveniaVideo.pause();
-	if (mountainVideo) mountainVideo.pause();
-});
+	const sloveniaVideo = document.getElementById('slovenia-video');
+	const mountainVideo = document.getElementById('mountain-video');
+
+	if (sloveniaVideo) (sloveniaVideo as HTMLVideoElement).pause();
+	if (mountainVideo) (mountainVideo as HTMLVideoElement).pause();
+
+})
 
 onMounted(() => {
-	videos.forEach(video => {
-		const videoElement = document.getElementById(video.id) as HTMLVideoElement;
-		if (videoElement) {
-			if (Hls.isSupported()) {
-				const hls = new Hls();
-				hls.loadSource(video.src);
-				hls.attachMedia(videoElement);
-				hls.on(Hls.Events.MANIFEST_PARSED, () => {
-					videoElement.play();
-				});
-				hls.on(Hls.Events.ERROR, (event, data) => {
-					if (data.fatal) {
-						switch (data.type) {
-							case Hls.ErrorTypes.NETWORK_ERROR:
-								console.error('Fatal network error encountered, trying to recover.');
-								hls.startLoad();
-								break;
-							case Hls.ErrorTypes.MEDIA_ERROR:
-								console.error('Fatal media error encountered, trying to recover.');
-								hls.recoverMediaError();
-								break;
-							default:
-								console.error('An unrecoverable error occurred.');
-								hls.destroy();
-								break;
-						}
-					}
-				});
-			} else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
-				videoElement.src = video.src;
-				videoElement.addEventListener('canplay', () => {
-					videoElement.play();
-				});
-			}
-		}
+
+	const sloveniaVideo = document.getElementById('slovenia-video');
+	const mountainVideo = document.getElementById('mountain-video');
+
+	console.log(sloveniaVideo, mountainVideo)
+	if (sloveniaVideo == null || mountainVideo == null) return
+
+	sloveniaVideo.addEventListener('play', () => {
+		(mountainVideo as HTMLVideoElement).pause();
 	});
 
-	const sloveniaVideo = document.getElementById('slovenia-video') as HTMLVideoElement;
-	const mountainVideo = document.getElementById('mountain-video') as HTMLVideoElement;
-
-	if (sloveniaVideo && mountainVideo) {
-		sloveniaVideo.addEventListener('play', () => {
-			mountainVideo.pause();
-		});
-
-		mountainVideo.addEventListener('play', () => {
-			sloveniaVideo.pause();
-		});
-	}
-});
+	mountainVideo.addEventListener('play', () => {
+		(sloveniaVideo as HTMLVideoElement).pause();
+	});
+})
 </script>
+
+
 
 <style scoped>
 .music-videos {
@@ -129,8 +112,11 @@ onMounted(() => {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+
+	/* gap: 10px; */
+	justify-content: center
 }
+
 
 .video-description {
 	position: relative;
@@ -157,6 +143,7 @@ onMounted(() => {
 .video-border {
 	border: 10px solid var(--light-grey-color);
 	background-color: var(--light-grey-color);
+
 	border-top-right-radius: 20px;
 	border-top-left-radius: 20px;
 	width: 300px !important;
@@ -176,6 +163,7 @@ onMounted(() => {
 		display: none;
 	}
 }
+
 
 .music-button {
 	width: 40px;
