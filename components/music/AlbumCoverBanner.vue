@@ -198,8 +198,12 @@ const startAutoScroll = () => {
 	transform: translateX(-4px) rotate(135deg) !important;
 }
 
+.virtual-scroller:hover .hover-scroll-pad {
+	opacity: .75;
+}
+
 .hover-scroll-pad:hover {
-	opacity: 1;
+	opacity: 1 !important;
 	z-index: 100;
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);

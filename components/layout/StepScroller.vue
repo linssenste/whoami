@@ -120,7 +120,7 @@ onUnmounted(() => {
 }
 
 .scrollable-content .content:last-child {
-	padding-bottom: 25%;
+	padding-bottom: 75px;
 }
 
 .fixed-content {

@@ -49,6 +49,9 @@
 			{{ featureLabel('acousticness', true) }} sounds.
 		</p>
 
+		<p>I enjoy weaving my musical tastes into my memories by creating videos that align with my mood
+			and music.</p>
+
 		<!-- end section -->
 		<p>
 			Now you know me <span id="text-7" style="padding-top: 10px">a little better?!</span>
@@ -76,7 +79,7 @@ useAnnotate('text-2', () => props.step == 3, 'underline', (Math.random() * 250))
 useAnnotate('text-3', () => props.step == 4, 'underline', (Math.random() * 250));
 useAnnotate('text-4', () => props.step == 5, 'underline', (Math.random() * 250));
 useAnnotate('text-5', () => props.step == 6, 'underline', (Math.random() * 250));
-useAnnotate('text-7', () => props.step == 7, 'underline', (Math.random() * 250));
+useAnnotate('text-7', () => props.step == 8, 'underline', (Math.random() * 250));
 
 
 

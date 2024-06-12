@@ -1,5 +1,5 @@
 <template>
-	<LayoutStepScroller :steps="7" text-side="right" id="music">
+	<LayoutStepScroller :steps="8" text-side="right" id="music">
 
 		<template v-slot:music-step-1>
 
@@ -44,10 +44,18 @@
 			<AnalysisMoodChart :data="analysisData.features" :visible="visible" />
 		</template>
 
-		<!-- step 7: cloned jupyter cell with link to notebook on github -->
+		<!-- step 7: self-made videos with music underlayed -->
 		<template v-slot:music-step-7="{ visible }">
+			<AnalysisMusicVideos v-on:play="playTrackEvent" :focus="visible" />
+		</template>
+
+		<!-- step 8: cloned jupyter cell with link to notebook on github -->
+		<template v-slot:music-step-8="{ visible }">
 			<AnalysisJupyterCell style="margin: 10px;" :visible="visible" />
 		</template>
+
+
+
 
 
 		<template v-slot:text="{ focus }">
@@ -129,6 +137,9 @@ function shuffleTracks(artistId: string | null = null) {
 	emit('selected', randomTrack);
 }
 
+function playTrackEvent(trackId: string) {
+	emit('selected', trackId)
+}
 
 </script>
 
