@@ -43,6 +43,7 @@ onMounted(() => {
 .polaroid-image {
 	position: relative;
 	width: 335px;
+	min-width: 335px;
 	margin: 10px;
 	height: 401px
 }
