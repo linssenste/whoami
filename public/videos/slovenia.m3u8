@@ -1,0 +1,12 @@
+#EXTM3U
+
+#EXT-X-STREAM-INF:BANDWIDTH=800000,RESOLUTION=640x1138
+https://firebasestorage.googleapis.com/v0/b/linssenweb.appspot.com/o/videos%2Fslovenia%2Foutput_360.mp4?alt=media&token=68e03a8a-7afa-4271-9536-81b188287939
+#EXT-X-STREAM-INF:BANDWIDTH=1400000,RESOLUTION=854x1518
+https://firebasestorage.googleapis.com/v0/b/linssenweb.appspot.com/o/videos%2Fslovenia%2Foutput_480.mp4?alt=media&token=93a89d69-2391-41eb-aff1-b4807ef30ab7
+#EXT-X-STREAM-INF:BANDWIDTH=2800000,RESOLUTION=1280x2276
+https://firebasestorage.googleapis.com/v0/b/linssenweb.appspot.com/o/videos%2Fslovenia%2Foutput_720.mp4?alt=media&token=60ab831e-bd64-4d92-a6b4-01bce4c02177
+#EXT-X-STREAM-INF:BANDWIDTH=5000000,RESOLUTION=1920x3412
+https://firebasestorage.googleapis.com/v0/b/linssenweb.appspot.com/o/videos%2Fslovenia%2Foutput_1080.mp4?alt=media&token=986bd5c4-5999-4cf6-9970-c880f38e9834
+#EXT-X-STREAM-INF:BANDWIDTH=8000000,RESOLUTION=2160x3840
+https://firebasestorage.googleapis.com/v0/b/linssenweb.appspot.com/o/videos%2Fslovenia%2Foutput_2160.mp4?alt=media&token=0bc38fcd-ef70-4089-999e-3b8f37aa94ce
