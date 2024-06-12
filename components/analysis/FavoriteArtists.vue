@@ -40,8 +40,7 @@ const props = defineProps<{
 	visible: boolean;
 }>();
 
-const visible = ref(props.visible);
-useAnnotate('top-header', visible);
+useAnnotate('top-header', () => props.visible);
 
 interface ArtistElement extends ArtistStatsElement {
 	id: string;
@@ -51,11 +50,6 @@ const sortedArtists = computed(() => {
 	return Object.entries(props.artists)
 		.map(([key, value]) => ({ ...value, id: key })) // Convert each entry into an object and include the original key as 'id'
 		.sort((a, b) => parseInt(b.occurrence) - parseInt(a.occurrence)); // Sort based on the 'occurrence' property
-});
-
-// Watch for changes in the props.visible
-watch(() => props.visible, (newValue) => {
-	visible.value = newValue;
 });
 
 

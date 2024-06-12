@@ -4,7 +4,7 @@
 		<!-- dotted divider line to indicate center of slider -->
 		<div class="half-divider-line" />
 
-		<div v-for="(feature, index) in features" :key="index" class="feature">
+		<div v-for="(feature, index) in audioFeatures" :key="index" class="feature">
 			<!-- left description label -->
 			<div class="description"><span :id="`${feature.id}-${props.data[feature.id] < 0.5 ? 'pos' : 'neg'}`">{{
 			feature.leftLabel }}</span></div>
@@ -23,29 +23,22 @@
 </template>
 
 <script lang="ts" setup>
-
+import { audioFeatures } from '~/utils/audioFeatures';
 
 const props = defineProps<{
 	data: Record<string, number>;
 	visible: boolean;
 }>();
 
-const features = [
-	{ id: 'danceability', leftLabel: 'Chillout', rightLabel: 'Danceable' },
-	{ id: 'valence', leftLabel: 'Depressed/Sad', rightLabel: 'Happy' },
-	{ id: 'energy', leftLabel: 'Chill', rightLabel: 'ENERGETIC' },
-	{ id: 'acousticness', leftLabel: 'Electronic Vibes', rightLabel: 'Unplugged' },
-];
 
-const visible = ref(props.visible);
 
-features.forEach(feature => {
-	useAnnotate(`${feature.id}-pos`, visible, 'box', Math.floor(Math.random() * (500 + 1)));
+
+
+audioFeatures.forEach(feature => {
+	useAnnotate(`${feature.id}-pos`, () => props.visible, 'box', Math.floor(Math.random() * (500 + 1)));
 });
 
-watch(() => props.visible, newValue => {
-	visible.value = newValue;
-});
+
 </script>
 <style scoped>
 .feature-graph {

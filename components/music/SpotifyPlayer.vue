@@ -1,14 +1,13 @@
 <template>
-	<div class="music-player" title="music player" :id="playerId"></div>
+	<div class="music-player" title="music player" allow="fullscreen; autoplay" :id="playerId"></div>
 </template>
-
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
 const hasError = ref(false);
 
-//interface for the Spotify IFrame API controller
+// Interface for the Spotify IFrame API controller
 interface SpotifyIFrameAPI {
 	createController: (
 		element: HTMLElement | null,
@@ -17,7 +16,7 @@ interface SpotifyIFrameAPI {
 	) => void;
 }
 
-// interface for the controller that the Spotify API returns
+// Interface for the controller that the Spotify API returns
 interface SpotifyController {
 	addListener: (event: string, callback: (e: any) => void) => void;
 	togglePlay: () => void;
@@ -32,43 +31,33 @@ props.playerId;
 
 const emit = defineEmits(['playing']);
 
-
-
 const embedController = ref<SpotifyController | null>(null);
 
-
 let errorTimeout: ReturnType<typeof setTimeout> | null = null;
-let isPlaying = false
+let isPlaying = false;
+
 watch(() => props.trackId, async () => {
 	if (props.trackId == null) return;
 	if (!embedController.value) {
-		initSpotifyApi()
+		initSpotifyApi();
 	} else if (props.trackId != null && embedController.value) {
-
-		console.log("HSHSH");
 		await embedController.value.loadUri('spotify:track:' + props.trackId);
-
-		if (isPlaying) embedController.value?.togglePlay()
-
-
+		if (isPlaying) embedController.value?.togglePlay();
 	}
 }, { immediate: true });
-function initSpotifyApi() {
 
+function initSpotifyApi() {
 	if (!props.trackId) return;
 	hasError.value = false;
 
-	// Extend timeout to a more reasonable duration
 	errorTimeout = setTimeout(() => {
 		if (embedController.value) return;
 		console.error("Timeout occurred while setting up Spotify API");
 		hasError.value = true;
-	}, 2000);  // Increased timeout to 2000 ms
+	}, 2000);
 
 	try {
-
 		(window as any).onSpotifyIframeApiReady = (IFrameAPI: SpotifyIFrameAPI) => {
-
 			if (errorTimeout) clearTimeout(errorTimeout);
 
 			const element = document.getElementById(props.playerId);
@@ -82,23 +71,14 @@ function initSpotifyApi() {
 				uri: 'spotify:track:' + props.trackId
 			};
 
-
-
 			const callback = (controller: SpotifyController) => {
-
 				embedController.value = controller;
 				hasError.value = false;
-
-
 
 				controller.addListener('playback_update', e => {
 					isPlaying = !e.data.isPaused;
 					emit("playing", !e.data.isPaused && !(e.data.position >= e.data.duration));
 				});
-
-
-
-
 			};
 
 			IFrameAPI.createController(element, options, callback);
@@ -109,8 +89,12 @@ function initSpotifyApi() {
 	}
 }
 
-
-
+// Example of tying audio context initialization to a user gesture
+function startPlayback() {
+	document.getElementById('startButton')?.addEventListener('click', () => {
+		togglePlaying();
+	});
+}
 
 function togglePlaying() {
 	try {

@@ -1,10 +1,10 @@
 <template>
-	<AnalysisStepScroller :steps="7" text-side="right" id="music">
+	<LayoutStepScroller :steps="7" text-side="right" id="music">
 
 		<template v-slot:music-step-1>
 
 			<div id="music-player" class="music-player">
-				<div class="hint-text">Select an album to play a song from it</div>
+				<div class="hint-text">Select an album to play a song</div>
 
 				<MusicSpotifyPlayer v-if="selectedTrack != null" v-on:playing="playingMusicEvent"
 									playerId="music-player-1" :trackId="selectedTrack" />
@@ -49,7 +49,12 @@
 			<AnalysisJupyterCell style="margin: 10px;" :visible="visible" />
 		</template>
 
-	</AnalysisStepScroller>
+
+		<template v-slot:text="{ focus }">
+			<AnalysisDescriptionText :step="focus" :data="analysisData" />
+
+		</template>
+	</LayoutStepScroller>
 </template>
 
 <script setup lang="ts">
@@ -80,6 +85,8 @@ export interface GenreStats {
 
 export interface AnalysisData {
 	stats: DataStats,
+	genres: GenreStats,
+	features: Record<string, number>,
 	artists: Record<string, ArtistStatsElement>
 	update_time: number,
 	decades: DecadesStats
@@ -90,7 +97,14 @@ export interface DecadesStats {
 }
 
 
-const emit = defineEmits(['playing', 'selected'])
+const emit = defineEmits(['playing', 'selected']);
+
+const props = defineProps<{
+	selectedTrack: string | null
+}>();
+
+props.selectedTrack;
+
 function playingMusicEvent(isPlaying: boolean) {
 	emit('playing', isPlaying)
 }
@@ -100,6 +114,8 @@ onMounted(() => {
 	shuffleTracks();
 })
 
+
+// randomly shuffle track or just by an artist
 function shuffleTracks(artistId: string | null = null) {
 	let albums = covers;
 
@@ -113,10 +129,6 @@ function shuffleTracks(artistId: string | null = null) {
 	emit('selected', randomTrack);
 }
 
-
-const props = defineProps<{
-	selectedTrack: string | null
-}>();
 
 </script>
 

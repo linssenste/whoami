@@ -12,19 +12,18 @@
 		<div class="last-update-time">{{ updateTime }}</div>
 
 		<!-- Github status badge -->
-		<a href="https://github.com/linssenste/whoami/actions/workflows/spotify_analysis.yml">
+		<a href="https://github.com/linssenste/whoami/actions/workflows/spotify_analysis.yml"
+		   aria-label="Link to github workflow of analysis script">
 			<img on data-not-lazy onerror="this.style.display='none'"
 				 src="https://github.com/linssenste/whoami/actions/workflows/spotify_analysis.yml/badge.svg"
 				 alt="Run Jupyter Notebook">
 		</a>
 
 	</div>
-
 </template>
 
 <script lang="ts" setup>
 import type { DataStats } from './PlaylistAnalysis.vue';
-
 
 const props = defineProps<{
 	stats: DataStats;
@@ -51,7 +50,6 @@ const displayedStats = computed(() => ({
 	HOURS: Math.ceil((props.stats.duration ?? 0) / 60)
 }));
 </script>
-
 <style scoped>
 .stats-column {
 	display: flex;
@@ -66,9 +64,11 @@ const displayedStats = computed(() => ({
 }
 
 .number-row {
-	display: flex;
+	display: grid;
 	width: 100%;
-	justify-content: space-between;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 15px;
+	justify-content: center;
 }
 
 .number-stat {
@@ -95,9 +95,10 @@ const displayedStats = computed(() => ({
 	margin-top: 15px;
 }
 
-@media screen and (max-width: 500px) {
-	.hours {
-		display: none;
+@media screen and (max-width: 600px) {
+	.number-row {
+		grid-template-columns: repeat(2, 1fr);
 	}
+
 }
 </style>
