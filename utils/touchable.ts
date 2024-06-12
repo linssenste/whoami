@@ -3,7 +3,7 @@ interface Navigator {
 }
 
 export const isTouchDevice = computed(() => {
-	return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || ((navigator as any).msMaxTouchPoints > 0);
+	return ('ontouchstart') || (navigator.maxTouchPoints > 0) || ((navigator as any).msMaxTouchPoints > 0);
 })
 
 
