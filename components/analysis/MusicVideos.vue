@@ -84,7 +84,6 @@ onMounted(() => {
 	const sloveniaVideo = document.getElementById('slovenia-video');
 	const mountainVideo = document.getElementById('mountain-video');
 
-	console.log(sloveniaVideo, mountainVideo)
 	if (sloveniaVideo == null || mountainVideo == null) return
 
 	sloveniaVideo.addEventListener('play', () => {

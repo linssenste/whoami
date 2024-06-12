@@ -1,10 +1,27 @@
+import { computed } from 'vue';
+
 interface Navigator {
-	msMaxTouchPoints?: number;
+  maxTouchPoints?: number;
+  msMaxTouchPoints?: number;
 }
 
 export const isTouchDevice = computed(() => {
-	return ('ontouchstart') || (navigator.maxTouchPoints > 0) || ((navigator as any).msMaxTouchPoints > 0);
-})
+  if (typeof process !== 'undefined' && process.server) {
+    // If running on the server, return false or handle accordingly
+    return false;
+  }
+
+  if (typeof navigator !== 'undefined') {
+    // Run only on the client-side
+    return (
+      'ontouchstart' in document.documentElement ||
+      (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+      (navigator as Navigator).msMaxTouchPoints! > 0
+    );
+  }
+
+  return false;
+});
 
 
 export const isMobile = ref(false);
