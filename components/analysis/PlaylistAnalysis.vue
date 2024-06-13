@@ -26,7 +26,7 @@
 
 		<!-- step 3: chart analysis of the decades the songs where published -->
 		<template v-slot:music-step-3="{ visible }">
-			<AnalysisDecadesChart :decades="analysisData.decades" />
+			<AnalysisDecadesChart :decades="analysisData.decades" :visible="visible" />
 		</template>
 
 		<!-- step 4: top 5 artists by (track) occurence  -->

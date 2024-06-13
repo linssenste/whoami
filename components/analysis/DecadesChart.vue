@@ -7,22 +7,37 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
 import type { DecadesStats } from './PlaylistAnalysis.vue';
 
 const props = defineProps<{
 	decades: DecadesStats,
+	visible: boolean
 }>();
 
 const series = ref([
 	{
 		name: 'Songs',
-		data: Object.values(props.decades)
+		data: new Array(Object.values(props.decades).length).fill(0)
 	}
 ]);
 
-const chartOptions = ref({
+const chartKey = ref(0);
 
+watch(() => props.visible, (newVal) => {
+	if (newVal) {
+		series.value = [{
+			name: 'Songs',
+			data: Object.values(props.decades)
+		}];
+	} else {
+		series.value = [{
+			name: 'Songs',
+			data: new Array(Object.values(props.decades).length).fill(0)
+		}];
+	}
+});
+
+const chartOptions = ref({
 	tooltip: {
 		enabled: true // Disable hover effects by turning off the tooltip
 	},
@@ -46,7 +61,6 @@ const chartOptions = ref({
 			}
 		}
 	},
-
 	yaxis: {
 		labels: {
 			style: {
@@ -71,7 +85,6 @@ const chartOptions = ref({
 	},
 });
 </script>
-
 
 <style scoped>
 .chart-container {
