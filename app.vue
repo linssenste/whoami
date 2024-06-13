@@ -52,14 +52,14 @@
 		</div>
 		<div style="width: 100%; height: 500px; background-color: grey;"></div>
 
-		<!-- 	<LayoutStepScroller :steps="5" id="me" text-side="left">
+		<LayoutStepScroller :steps="5" id="me" text-side="left">
 
 			<template v-for="index in 5" :key="index" v-slot:[`me-step-${index}`]>
 				<div :id="`me-step-${index}`" style="width: 100%; height: 500px; background-color: lightcoral;">{{
 			index }}
 				</div>
 			</template>
-		</LayoutStepScroller> -->
+		</LayoutStepScroller>
 
 	</div>
 </template>
