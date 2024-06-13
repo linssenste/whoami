@@ -15,7 +15,6 @@
 .hint-area {
 	position: relative;
 	display: flex;
-	background-color: white;
 	flex-direction: row;
 	gap: 15px;
 	align-items: center;
