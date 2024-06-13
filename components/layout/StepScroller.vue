@@ -5,7 +5,7 @@
 				<slot :name="`${id}-step-${step}`" :visible="currentFocus == step" :index="step" />
 			</div>
 		</div>
-		<div class="fixed-content" ref="textSideRef">
+		<div class="fixed-content" :class="{ 'left-bound': isTextSideLeft }" ref="textSideRef">
 			<slot name="text" :focus="currentFocus" />
 		</div>
 	</div>
@@ -22,7 +22,7 @@ const props = defineProps<{
 
 const { isMobile } = useDeviceDetection();
 
-const isTextSideLeft = computed(() => props.textSide === 'left');
+const isTextSideLeft = computed(() => props.textSide == 'left');
 
 const textSideRef = ref<HTMLElement | null>(null);
 const scrollSideRef = ref<HTMLElement | null>(null);
@@ -130,9 +130,12 @@ onUnmounted(() => {
 	min-width: 600px;
 	max-width: 600px;
 	box-sizing: border-box;
-	right: 0px !important;
-
+	right: 0px;
 	padding: 0px 20px 0px 20px;
+}
+
+.left-bound {
+	left: 0px !important;
 }
 
 .content-wrapper.mobile-view .fixed-content {
