@@ -1,7 +1,7 @@
 <template>
 
 	<div class="polaroid-image" ref="polaroidRef">
-		<img :src="src" width="100%" height="100%" :alt="alt" data-testid="image" draggable="false"
+		<img :src="src" width="335" height="401" :alt="alt" data-testid="image" draggable="false"
 			 onerror="this.src='/polaroids/polaroid-error.webp'" data-not-lazy />
 	</div>
 
@@ -42,9 +42,10 @@ onMounted(() => {
 <style scoped>
 .polaroid-image {
 	position: relative;
-	width: 335px;
-	min-width: 335px;
+	width: 335px !important;
+	min-width: 335px !important;
 	margin: 10px;
-	height: 401px
+	height: 401px !important;
+	min-height: 401px !important;
 }
 </style>

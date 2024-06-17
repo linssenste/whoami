@@ -23,7 +23,7 @@ html {
 	line-height: 24px;
 	font-size: 17px;
 	position: relative;
-	background-color: white;
+	background-color: #fcfcfcfc;
 	padding: 0px!important; 
 	margin: 0px!important;
 
@@ -43,4 +43,6 @@ h1 {
 	color: var(--pen-color);
 	font-family: 'biro_script_standardregular';
 	font-size: 36px !important;
+	
+
 }

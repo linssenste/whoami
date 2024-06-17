@@ -1,46 +1,40 @@
 <template>
 	<PolaroidExpandableStack ref="polaroidStack" stackName="testname" :polaroids="polaroids">
 		<template v-slot:text>
-			<div class="intro-text">
 
-				<h1>Hi, my name is Steffen!</h1>
+			<!-- introduction text  -->
+			<div id="welcome-introduction">
 
+				<!-- greetings (with name if query is defined)  -->
+				<h1>Hello<span v-if="welcomeName" id="name" class="welcome-name">{{ welcomeName }}</span>!</h1>
 				<p>
-					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-					ut
-					labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-					dolores
-					et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-					Lorem
-					ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-					labore
-					et
-					dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-					rebum.
-					Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+					My name is Steffen, and I am a front-end developer with a passion for sleek UI & UX. My work is
+					driven by a deep interest for both technology and design, complemented by my enthusiasm for music. I
+					may not be a virtuoso, but the world of melodies deeply influences and inspires my creative process.
+				</p>
+				<p>This website is more than just a portfolio of my technical skills and creative endeavours. It's a
+					window into my personal world. Here you'll find a series of Polaroid images that offer glimpses into
+					my daily life, share insights into my journey with disability, and reveal my deep connection to
+					music. Together, these elements are a reflection of the many aspects of my life and passions.
 				</p>
 
-				<span id="">This is the <span id="human">human</span> text to be annotated.</span>
-
-				<br>
-				<Button v-on:click="toggleGallery" color="black" text="Show Gallery"
-						style="margin-top: 20px; margin-bottom: 20px" />
+				<!-- slide-hover button to open gallery with polaroids -->
+				<Button @click="toggleGallery" color="black" text="Show Gallery" class="gallery-button" />
 			</div>
 		</template>
 	</PolaroidExpandableStack>
 </template>
 
 <script setup lang="ts">
-const polaroidStack = ref<HTMLElement | null>(null);
 import type { PolaroidCard } from '../components/polaroid/ExpandableStack.vue';
 
+const polaroidStack = ref<HTMLElement | null>(null);
 
-useAnnotate('human');
 
 function toggleGallery() {
 	if (polaroidStack.value) {
 		(polaroidStack.value as any).toggleExpansion();
-		window.scroll({ top: 0, behavior: 'smooth' })
+		window.scroll({ top: 0, behavior: 'smooth' });
 	}
 }
 
@@ -68,6 +62,31 @@ const shufflePolaroids = (): PolaroidCard[] => {
 	return polaroids;
 };
 
-const polaroids = useState<POLAROID_CARD[]>('polaroids', () => shufflePolaroids());
+// randomized polaroid images in stack
+const polaroids = useState<PolaroidCard[]>('polaroids', () => shufflePolaroids());
+
+
+const welcomeName = ref<null | string>(null);
+const route = useRoute();
+
+// underline name if present 
+useAnnotate('name', undefined, 'underline', 0, [-15, 0, -15, 0]);
+
+// retrieve name from query parameter 
+onBeforeMount(() => {
+	welcomeName.value = route.query.name as string || null;
+});
 
 </script>
+
+
+<style scoped>
+.welcome-name {
+	margin-left: 15px;
+}
+
+.gallery-button {
+	margin-top: 10px;
+	margin-bottom: 10px
+}
+</style>
