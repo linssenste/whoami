@@ -1,5 +1,8 @@
 <template>
-	<div class="music-player" title="music player" allow="fullscreen; autoplay" :id="playerId"></div>
+	<div class="music-player" :id="playerId">
+		<iframe ref="spotifyIframe" :src="iframeSrc" allow="fullscreen; autoplay" allowfullscreen title="music player"
+				frameborder="0"></iframe>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -32,12 +35,14 @@ props.playerId;
 const emit = defineEmits(['playing']);
 
 const embedController = ref<SpotifyController | null>(null);
+const iframeSrc = ref('');
 
 let errorTimeout: ReturnType<typeof setTimeout> | null = null;
 let isPlaying = false;
 
 watch(() => props.trackId, async () => {
 	if (props.trackId == null) return;
+	iframeSrc.value = `https://open.spotify.com/embed/track/${props.trackId}`;
 	if (!embedController.value) {
 		initSpotifyApi();
 	} else if (props.trackId != null && embedController.value) {
@@ -60,7 +65,7 @@ function initSpotifyApi() {
 		(window as any).onSpotifyIframeApiReady = (IFrameAPI: SpotifyIFrameAPI) => {
 			if (errorTimeout) clearTimeout(errorTimeout);
 
-			const element = document.getElementById(props.playerId);
+			const element = document.getElementById(props.playerId)?.querySelector('iframe');
 
 			if (!element) {
 				hasError.value = true;
@@ -84,7 +89,6 @@ function initSpotifyApi() {
 			IFrameAPI.createController(element, options, callback);
 		};
 	} catch (error) {
-		console.error("Error setting up Spotify iframe:", error);
 		hasError.value = true;
 	}
 }
@@ -99,8 +103,8 @@ function startPlayback() {
 function togglePlaying() {
 	try {
 		embedController.value?.togglePlay();
-	} catch (error) {
-		console.error("Error toggling playback:", error);
+	} catch {
+		return
 	}
 }
 
