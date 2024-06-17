@@ -38,13 +38,13 @@
 
 <script lang="ts" setup>
 
-export interface POLAROID_CARD {
+export interface PolaroidCard {
 	src: string,
 	alt: string
 }[]
 
 const props = defineProps<{
-	polaroids: POLAROID_CARD[];
+	polaroids: PolaroidCard[];
 }>();
 
 props.polaroids;

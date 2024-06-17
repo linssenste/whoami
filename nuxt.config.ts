@@ -1,6 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  components: [
+    // Auto-import components in the components directory
+    { path: '~/components', pathPrefix: true },
+    // Auto-import components in the sections directory
+    { path: '~/sections', pathPrefix: false },
+  ],
   app: {
     head: {
       script: [

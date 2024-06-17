@@ -49,7 +49,7 @@ const albumId = ref<string | null>(null)
 
 
 const selectCover = (item: AlbumCover) => {
-	console.log('Selected item:', item)
+
 	albumId.value = item.id
 	selectedTrack.value = item.tracks[Math.floor(Math.random() * item.tracks.length)]
 	emit('track-selected', selectedTrack.value)
