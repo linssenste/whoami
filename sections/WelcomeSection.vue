@@ -34,7 +34,7 @@ const polaroidStack = ref<HTMLElement | null>(null);
 
 function toggleGallery() {
 	if (polaroidStack.value) {
-		(polaroidStack.value as any).toggleExpansion();
+		(polaroidStack.value as any).toggleExpansion(true);
 		window.scroll({ top: 0, behavior: 'smooth' });
 	}
 }

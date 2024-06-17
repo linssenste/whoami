@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<JumpTopButton />
-		<WelcomeSection />
+		<WelcomeSection class="welcome-section" />
 		<!-- <MusicSection /> -->
 		<!-- <div style="width: 100%; height: 500px; background-color: grey;"></div> -->
 		<!-- <PortfolioTimeline /> -->
@@ -22,3 +22,10 @@ useHead({
 	]
 });
 </script>
+
+
+<style scoped>
+.welcome-section {
+	margin-top: 50px;
+}
+</style>

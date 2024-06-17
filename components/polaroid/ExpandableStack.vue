@@ -78,28 +78,32 @@ onMounted(() => {
 
 	setStyling();
 
-	window.addEventListener('resize', handleResize);
 
-});
+	// watching width resize events
+	var prevWidth = window.innerWidth;
+	var resizeObserve = new ResizeObserver(function (entries) {
+		const width = entries[0].borderBoxSize?.[0].inlineSize;
+		if (typeof width === 'number' && width !== prevWidth) {
+			prevWidth = width;
+			windowWidth.value = width;
+			if (expanded.value) {
+				toggleExpansion();
+			}
+		}
+	})
+	resizeObserve.observe(window.document.body);
 
-
-function handleResize() {
-	windowWidth.value = window.innerWidth;
-	if (expanded.value) {
-		toggleExpansion();
-	}
-}
-onBeforeUnmount(() => {
-	window.removeEventListener('resize', handleResize);
 });
 
 const textTransition = computed(() => {
 	return (windowWidth.value >= 1000 && !showText.value ? 'width: 0px!important; transition: all .3s ease-in-out' : 'transition: all .15s ease-in-out')
 })
 
-function toggleExpansion(): void {
+function toggleExpansion(open = false): void {
 
-	expanded.value = !expanded.value;
+
+	if (open == true) expanded.value = true
+	else expanded.value = !expanded.value;
 
 	if (window.innerWidth <= 850) showText.value = true;
 	else showText.value = !expanded.value
