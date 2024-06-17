@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  plugins: [
+    '~/plugins/random-favicon.client.ts',
+  ],
   components: [
     // Auto-import components in the components directory
     { path: '~/components', pathPrefix: true },
