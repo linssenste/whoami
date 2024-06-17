@@ -115,5 +115,11 @@ p {
 		display: none;
 	}
 
+	h1 {
+		padding-top: 50px;
+		text-align: center;
+		line-height: 40px;
+	}
+
 }
 </style>

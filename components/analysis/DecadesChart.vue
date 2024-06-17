@@ -22,20 +22,19 @@ const series = ref([
 	}
 ]);
 
-const chartKey = ref(0);
-
 watch(() => props.visible, (newVal) => {
 	if (newVal) {
 		series.value = [{
 			name: 'Songs',
 			data: Object.values(props.decades)
 		}];
-	} else {
-		series.value = [{
-			name: 'Songs',
-			data: new Array(Object.values(props.decades).length).fill(0)
-		}];
 	}
+	// else {
+	// 	series.value = [{
+	// 		name: 'Songs',
+	// 		data: new Array(Object.values(props.decades).length).fill(0)
+	// 	}];
+	// }
 });
 
 const chartOptions = ref({
@@ -77,7 +76,7 @@ const chartOptions = ref({
 		}
 	},
 	fill: {
-		colors: ['#F44336']
+		colors: ['var(--red-color)']
 	},
 	stroke: {
 		show: true,

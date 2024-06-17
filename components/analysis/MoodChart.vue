@@ -35,7 +35,7 @@ const props = defineProps<{
 
 
 audioFeatures.forEach(feature => {
-	useAnnotate(`${feature.id}-pos`, () => props.visible, 'box', Math.floor(Math.random() * (500 + 1)));
+	useAnnotate(`${feature.id}-pos`, () => props.visible, 'box', Math.floor(Math.random() * (500 + 1)), [5, 5]);
 });
 
 
@@ -57,7 +57,7 @@ audioFeatures.forEach(feature => {
 	flex: 1;
 	text-align: center;
 	text-transform: uppercase;
-	font-size: 13px;
+	font-size: 12px;
 	letter-spacing: 1px;
 }
 
@@ -67,6 +67,12 @@ audioFeatures.forEach(feature => {
 	height: 7px;
 	border-radius: 4px;
 	background-color: var(--light-grey-color);
+}
+
+@media screen and (max-width: 400px) {
+	.line {
+		flex: 1
+	}
 }
 
 .dot {

@@ -9,9 +9,9 @@
 
 
 	<div class="music-love-images">
-		<PolaroidImage src="/polaroids/music/polaroid-1.webp" alt="" />
-		<PolaroidImage src="/polaroids/music/polaroid-2.webp" alt="" />
-		<PolaroidImage src="/polaroids/music/polaroid-3.webp" alt="" />
+		<PolaroidImage loading="lazy" src="/polaroids/music/polaroid-1.webp" alt="" />
+		<PolaroidImage loading="lazy" src="/polaroids/music/polaroid-2.webp" alt="" />
+		<PolaroidImage loading="lazy" src="/polaroids/music/polaroid-3.webp" alt="" />
 
 	</div>
 </template>
