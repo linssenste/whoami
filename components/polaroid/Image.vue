@@ -2,7 +2,7 @@
 
 
 	<img :src="src" class="polaroid-image" ref="polaroidRef" width="335" height="401" :alt="alt" data-testid="image"
-		 draggable="false" onerror="this.src='/polaroids/polaroid-error.webp'" fetchpriority="high" />
+		 draggable="false" onerror="this.src='/polaroids/polaroid-error.webp'" />
 
 
 </template>

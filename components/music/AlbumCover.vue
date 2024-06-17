@@ -14,7 +14,7 @@
 			<img draggable="false" class="cover-image" oncontextmenu="return false" width="150" height="150" alt=""
 				 v-on:mouseenter="setHoveringState(true)" v-on:mouseleave="setHoveringState(false)"
 				 :src="`https://i.scdn.co/image/ab67616d00001e02${src.cover}`" onerror="this.style.display='none'"
-				 v-lazy-load />
+				 v-lazy-load loading="lazy" />
 
 			<!-- audio equalizer overlay if song is playing -->
 			<div v-if="status.selected" class="equalizer-overlay" v-on:mouseenter="setHoveringState(true)"
