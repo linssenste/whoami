@@ -7,7 +7,9 @@
 		"dev": "nuxt dev --host",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare"
+		"postinstall": "nuxt prepare",
+		"lhci:mobile": "lhci autorun",
+		"lhci:desktop": "lhci autorun --collect.settings.preset=desktop"
 	},
 	"dependencies": {
 		"apexcharts": "^3.49.1",
@@ -22,6 +24,7 @@
 		"vue3-apexcharts": "^1.5.3"
 	},
 	"devDependencies": {
+		"@lhci/cli": "^0.13.0",
 		"sass": "^1.77.4"
 	}
 }

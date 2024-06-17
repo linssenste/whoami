@@ -1,6 +1,6 @@
 <template>
 	<div class="art-image-container" ref="imageContainerRef">
-		<img data-not-lazy data-testid="risograph-image" height="100%"
+		<img data-not-lazy data-testid="risograph-image" height="100%" fetchpriority="high" preload
 			 alt="colorful rounded forms in risographic style with the letter S and L in the center"
 			 src="../assets/images/risograph.svg" class="art-image" />
 	</div>

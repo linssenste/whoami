@@ -1,7 +1,7 @@
 <template>
 	<div class="music-player" :id="playerId">
-		<iframe ref="spotifyIframe" :src="iframeSrc" allow="fullscreen; autoplay" allowfullscreen title="music player"
-				frameborder="0"></iframe>
+		<iframe ref="spotifyIframe" sandbox="allow-scripts" :src="iframeSrc" allow="fullscreen; autoplay"
+				allowfullscreen title="music player" frameborder="0"></iframe>
 	</div>
 </template>
 

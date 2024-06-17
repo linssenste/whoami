@@ -6,7 +6,8 @@
 			<div id="welcome-introduction">
 
 				<!-- greetings (with name if query is defined)  -->
-				<h1>Hello<span v-if="welcomeName" id="name" class="welcome-name">{{ welcomeName }}</span>!</h1>
+				<h1>Hello<span v-if="welcomeName" id="name" class="welcome-name">{{ welcomeName }}</span>!
+				</h1>
 				<p>
 					My name is Steffen, and I am a front-end developer with a passion for sleek UI & UX. My work is
 					driven by a deep interest for both technology and design, complemented by my enthusiasm for music. I
@@ -46,11 +47,6 @@ const shufflePolaroids = (): PolaroidCard[] => {
 		{ src: '/polaroids/polaroid-4.webp', alt: 'moin' },
 		{ src: '/polaroids/polaroid-5.webp', alt: 'moin' },
 		{ src: '/polaroids/polaroid-6.webp', alt: 'moin' },
-		{ src: '/polaroids/polaroid-7.webp', alt: 'moin' },
-		{ src: '/polaroids/polaroid-8.webp', alt: 'moin' },
-		{ src: '/polaroids/polaroid-9.webp', alt: 'moin' },
-		{ src: '/polaroids/polaroid-10.webp', alt: 'moin' },
-		{ src: '/polaroids/polaroid-11.webp', alt: 'moin' }
 	];
 
 	// Shuffle all but the last element
@@ -66,8 +62,8 @@ const shufflePolaroids = (): PolaroidCard[] => {
 const polaroids = useState<PolaroidCard[]>('polaroids', () => shufflePolaroids());
 
 
-const welcomeName = ref<null | string>(null);
 const route = useRoute();
+const welcomeName = ref<null | string>(route.query.name as string || null);
 
 // underline name if present 
 useAnnotate('name', undefined, 'underline', 0, [-15, 0, -15, 0]);

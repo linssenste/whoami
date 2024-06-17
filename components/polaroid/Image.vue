@@ -2,7 +2,7 @@
 
 	<div class="polaroid-image" ref="polaroidRef">
 		<img :src="src" width="335" height="401" :alt="alt" data-testid="image" draggable="false"
-			 onerror="this.src='/polaroids/polaroid-error.webp'" data-not-lazy />
+			 onerror="this.src='/polaroids/polaroid-error.webp'" data-not-lazy fetchpriority="high" />
 	</div>
 
 </template>
