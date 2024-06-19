@@ -12,7 +12,7 @@
 		<div class="last-update-time">{{ updateTime }}</div>
 
 		<!-- Github status badge -->
-		<a tabindex="-1" target="_blank"
+		<a tabindex="-1" target="_blank" style="transform: scale(1.1);"
 		   href="https://github.com/linssenste/whoami/actions/workflows/spotify_analysis.yml"
 		   aria-label="Link to github workflow of analysis script">
 			<img on data-not-lazy onerror="this.style.display='none'"
