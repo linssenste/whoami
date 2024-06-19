@@ -14,7 +14,7 @@
 
 		<!-- decades chart + link to resarch paper on music taste -->
 		<p>
-			According to <a href="https://ojs.aaai.org/index.php/ICWSM/article/view/3250/3118"
+			According to <a tabindex="-1" href="https://ojs.aaai.org/index.php/ICWSM/article/view/3250/3118"
 			   target="_blank">research</a>, people tend to be particularly fond of music from their
 			teenage
 			years. And I happen to be no exception: My musical taste is largely contemporary,
@@ -99,7 +99,7 @@ const featureLabel = (labelId: string, inverted: boolean = false) => {
 
 <style scoped>
 .scrolling-hint {
-	margin-top: 50px;
+	margin-top: 100px;
 	margin-bottom: 50px;
 }
 

@@ -1,0 +1,85 @@
+
+
+
+input#menu {
+	display: none;
+}
+
+.mobile-icon {
+	cursor: pointer;
+	display: block;
+	height: 24px;
+	padding: 15px;
+	border-radius: 6px;
+	width: 25px;
+}
+
+label.mobile-icon {
+	position: fixed;
+	z-index: 200;
+}
+
+.mobile-icon .mobile-menu,
+.mobile-icon .mobile-menu::before,
+.mobile-icon .mobile-menu::after {
+	background: var(--icon-color);
+	content: '';
+	display: block;
+	height: 2px;
+	position: absolute;
+	transition: background ease 200ms, top ease 200ms 200ms, transform ease 200ms;
+	width: 20px;
+}
+
+.mobile-icon:hover .mobile-menu,
+.mobile-icon:hover .mobile-menu::before,
+.mobile-icon:hover .mobile-menu::after {
+	background: var(--icon-color);
+}
+
+.mobile-icon .mobile-menu {
+	left: 18px;
+	top: 27px;
+}
+
+.mobile-icon .mobile-menu::before {
+	top: -6px;
+}
+
+.mobile-icon .mobile-menu::after {
+	top: 6px;
+}
+
+#menu:checked+.mobile-icon .mobile-menu {
+	background: transparent;
+}
+
+#menu:checked+.mobile-icon .mobile-menu::before {
+	transform: rotate(45deg);
+}
+
+#menu:checked+.mobile-icon .mobile-menu::after {
+	transform: rotate(-45deg);
+}
+
+#menu:checked+.mobile-icon .mobile-menu::before,
+#menu:checked+.mobile-icon .mobile-menu::after {
+	top: 0;
+	transition: top ease 200ms, transform ease 200ms 200ms;
+}
+
+nav {
+	
+	height: 100vh;
+	padding-top: 60px;
+	position: fixed;
+	transition: width ease .6s;
+	width: 60px;
+	z-index: 100;
+
+	overflow: hidden;
+}
+
+#menu:checked~nav {
+	width: 200px;
+}

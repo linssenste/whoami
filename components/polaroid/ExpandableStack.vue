@@ -14,7 +14,7 @@
 			<li class="polaroid append-slot" :style="cardStyling(polaroids.length)"
 				:class="!expanded ? 'append-slot-hidden' : ''" data-testid="close-button-card">
 
-				<button v-on:click="toggleExpansion(true)" data-testid="close-button" class="close-button"
+				<button v-on:click="toggleExpansion(false)" data-testid="close-button" class="close-button"
 						aria-label="Close expanded polaroid stack">
 					<!-- <img src="../assets/icons/chevron-left.svg" alt="chevron left" title="Close polaroid stack"
 						 width="16" height="16" /> -->

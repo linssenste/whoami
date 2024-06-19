@@ -1,6 +1,6 @@
 <template>
 	<div class="audio-equalizer">
-		<div v-for="i in 5" :key="i" :data-testid="`visualizer-${i}`"
+		<div v-for="i in 4" :key="i" :data-testid="`visualizer-${i}`"
 			 :style="{ animationDelay: getDelay(), backgroundColor: getColor(i) }" class="audio-visualizer"
 			 :class="!playing ? 'pause' : 'play'" />
 	</div>
@@ -13,13 +13,13 @@ const props = defineProps<{
 	playing: boolean
 }>();
 
-const colors = ["red", "blue", "pink", "yellow", "green", "orange"];
+const colors = ["red", "blue", "pink", "purple", "green", "orange"];
 const shuffledColors = ref(shuffleArray([...colors]));
 
 
 // set random transition delay to achieve equalizer effect
 function getDelay(): string {
-	const randomDelay = 100 + Math.random() * 600;
+	const randomDelay = 100 + Math.random() * 750;
 	return !props.playing ? 'infinite' : `${randomDelay}ms`;
 }
 
@@ -55,17 +55,17 @@ function getColor(index: number): string {
 .audio-equalizer {
 	display: flex;
 	flex-direction: row;
-	gap: 2px;
+	gap: 4px;
 
 }
 
 .audio-visualizer {
-	width: 6px;
-	height: 6px;
+	width: 8px;
+	height: 8px;
 	border-radius: 4px;
 
-	transition: all 200ms ease-in-out;
-
+	transition: all 150ms ease-in-out;
+	overflow: hidden;
 	transform-origin: center;
 	opacity: .9;
 	backdrop-filter: blur(8px);
@@ -76,18 +76,24 @@ function getColor(index: number): string {
 
 	0%,
 	100% {
+
+		border-radius: 4px;
 		transform: scaleY(1);
 		-webkit-transform: scaleY(1);
 		-moz-transform: scaleY(1);
 	}
 
 	25% {
+
+		border-radius: 3px;
 		transform: scaleY(1.5);
 		-webkit-transform: scaleY(1.5);
 		-moz-transform: scaleY(1.5);
 	}
 
 	75% {
+		border-radius: 6px;
+
 		transform: scaleY(0.6);
 		-webkit-transform: scaleY(.6);
 		-moz-transform: scaleY(.6);

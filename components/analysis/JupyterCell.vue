@@ -38,7 +38,7 @@
 					<!-- pseudo results -->
 					<div v-if="!running && visible" class="results">
 						<!-- Link section -->
-						Analysis complete. View report at: <a target="_blank"
+						Analysis complete. View report at: <a tabindex="-1" target="_blank"
 						   href="https://github.com/linssenste/hello/blob/main/assets/analysis/spotify.ipynb">https://github.com/linssenste/hello/blob/main/assets/analysis/spotify.ipynb</a>
 
 					</div>

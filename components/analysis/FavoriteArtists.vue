@@ -74,7 +74,7 @@ function playFavorite(artist: ArtistElement) {
 	padding: 10px;
 	flex-direction: row;
 	align-items: center;
-	gap: 20px;
+	gap: 0px;
 	border-radius: 6px;
 }
 
@@ -90,6 +90,7 @@ function playFavorite(artist: ArtistElement) {
 	height: 90px;
 	overflow: hidden;
 	position: relative;
+	margin-right: 20px;
 }
 
 .play-song-overlay {
@@ -141,6 +142,16 @@ function playFavorite(artist: ArtistElement) {
 
 .artist-name {
 	font-size: 18px;
+}
+
+@media screen and (max-width: 400px) {
+	.artist-name {
+		width: 100px;
+		overflow: hidden;
+		display: inline-block;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 img[alt]:after {

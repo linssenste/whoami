@@ -7,7 +7,8 @@
 				<div class="hint-text">Select an album to play a song</div>
 				<ClientOnly>
 					<MusicSpotifyPlayer v-if="selectedTrack != null" v-on:playing="playingMusicEvent"
-										playerId="music-player-1" :trackId="selectedTrack" />
+										v-on:next="shuffleTracks()" playerId="music-player-1"
+										:trackId="selectedTrack" />
 				</ClientOnly>
 				<button v-on:click="shuffleTracks()" class="shuffle-button">
 					<img data-not-lazy width="18" height="18" src="../../assets/icons/shuffle.svg" alt="shuffle icon" />

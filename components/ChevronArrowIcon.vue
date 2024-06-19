@@ -24,8 +24,8 @@ const size = props.size || 16;
 	position: relative;
 	width: 12px;
 	height: 12px;
-	border-left: 3px solid #000;
-	border-top: 3px solid #000;
+	border-left: 3px solid var(--icon-color);
+	border-top: 3px solid var(--icon-color);
 	transform: translateY(2px) rotate(45deg);
 	transition: transform 250ms ease-in-out;
 }
@@ -42,7 +42,7 @@ button .icon::after {
 	left: -7px;
 	width: 3px;
 	height: 3px;
-	border-right: 24px solid #000;
+	border-right: 24px solid var(--icon-color);
 	transform: rotate(45deg);
 	opacity: 0;
 	transition-delay: 50ms;

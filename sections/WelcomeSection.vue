@@ -1,29 +1,34 @@
 <template>
-	<PolaroidExpandableStack ref="polaroidStack" stackName="testname" :polaroids="polaroids">
-		<template v-slot:text>
+	<div>
+		<PolaroidExpandableStack ref="polaroidStack" stackName="testname" :polaroids="polaroids">
+			<template v-slot:text>
 
-			<!-- introduction text  -->
-			<div id="welcome-introduction">
+				<!-- introduction text  -->
+				<div id="welcome-introduction">
 
-				<!-- greetings (with name if query is defined)  -->
-				<h1>Hello<span v-if="welcomeName" id="name" class="welcome-name">{{ welcomeName }}</span>!
-				</h1>
-				<p>
-					My name is Steffen, and I am a front-end developer with a passion for sleek UI & UX. My work is
-					driven by a deep interest for both technology and design, complemented by my enthusiasm for music. I
-					may not be a virtuoso, but the world of melodies deeply influences and inspires my creative process.
-				</p>
-				<p>This website is more than just a portfolio of my technical skills and creative endeavours. It's a
-					window into my personal world. Here you'll find a series of Polaroid images that offer glimpses into
-					my daily life, share insights into my journey with disability, and reveal my deep connection to
-					music. Together, these elements are a reflection of the many aspects of my life and passions.
-				</p>
+					<!-- greetings (with name if query is defined)  -->
+					<h1>Hello<span v-if="welcomeName" id="name" class="welcome-name">{{ welcomeName }}</span>!
+					</h1>
+					<p>
+						My name is Steffen, and I am a front-end developer with a passion for sleek UI & UX. My work is
+						driven by a deep interest for both technology and design, complemented by my enthusiasm for
+						music. I
+						may not be a virtuoso, but the world of melodies deeply influences and inspires my creative
+						process.
+					</p>
+					<p>This website is more than just a portfolio of my technical skills and creative endeavours. It's a
+						window into my personal world. Here you'll find a series of Polaroid images that offer glimpses
+						into
+						my daily life, share insights into my journey with disability, and reveal my deep connection to
+						music. Together, these elements are a reflection of the many aspects of my life and passions.
+					</p>
 
-				<!-- slide-hover button to open gallery with polaroids -->
-				<Button @click="toggleGallery" color="black" text="Show Gallery" class="gallery-button" />
-			</div>
-		</template>
-	</PolaroidExpandableStack>
+					<!-- slide-hover button to open gallery with polaroids -->
+					<!-- <Button @click="toggleGallery" color="black" text="Show Gallery" class="gallery-button" /> -->
+				</div>
+			</template>
+		</PolaroidExpandableStack>
+	</div>
 </template>
 
 <script setup lang="ts">

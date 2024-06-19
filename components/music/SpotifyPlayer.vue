@@ -1,7 +1,7 @@
 <template>
 	<div class="music-player" :id="playerId">
 		<iframe ref="spotifyIframe" sandbox="allow-scripts" :src="iframeSrc" allow="fullscreen; autoplay"
-				allowfullscreen title="music player" frameborder="0"></iframe>
+				allowfullscreen title="music player" frameborder="0" tabindex="-1"></iframe>
 	</div>
 </template>
 
@@ -32,7 +32,7 @@ const props = defineProps<{
 }>();
 props.playerId;
 
-const emit = defineEmits(['playing']);
+const emit = defineEmits(['playing', 'next']);
 
 const embedController = ref<SpotifyController | null>(null);
 const iframeSrc = ref('');
@@ -62,6 +62,8 @@ function initSpotifyApi() {
 	}, 2000);
 
 	try {
+
+		let finishing = false;
 		(window as any).onSpotifyIframeApiReady = (IFrameAPI: SpotifyIFrameAPI) => {
 			if (errorTimeout) clearTimeout(errorTimeout);
 
@@ -82,7 +84,17 @@ function initSpotifyApi() {
 
 				controller.addListener('playback_update', e => {
 					isPlaying = !e.data.isPaused;
-					emit("playing", !e.data.isPaused && !(e.data.position >= e.data.duration));
+					emit("playing", !e.data.isPaused && !(e.data.position > 0 && e.data.position >= e.data.duration));
+
+
+					if ((e.data.position > 0 && e.data.position >= e.data.duration) && !finishing) {
+						finishing = true;
+						emit('next')
+						setTimeout(() => {
+							finishing = false;
+						}, 10);
+
+					}
 				});
 			};
 
@@ -91,13 +103,6 @@ function initSpotifyApi() {
 	} catch (error) {
 		hasError.value = true;
 	}
-}
-
-// Example of tying audio context initialization to a user gesture
-function startPlayback() {
-	document.getElementById('startButton')?.addEventListener('click', () => {
-		togglePlaying();
-	});
 }
 
 function togglePlaying() {
