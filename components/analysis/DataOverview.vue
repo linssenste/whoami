@@ -58,7 +58,7 @@ const displayedStats = computed(() => ({
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	gap: 25px;
+	gap: 10px;
 	padding-top: 30px;
 	/* padding-bottom: 50px; */
 }
