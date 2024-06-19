@@ -44,7 +44,7 @@
 			</div>
 
 			<!-- toggle mobilemenu button -->
-			<div class="menu-toggle-btn">
+			<div class="open-menu-toggle">
 				<input type="checkbox" v-model="expandMobileMenu" id="menu">
 				<label for="menu" class="mobile-icon">
 					<div class="mobile-menu"></div>
@@ -157,8 +157,6 @@ onUnmounted(() => {
 
 // slider active element (desktop)
 watch(inViewSection, () => {
-	// if (isMobile.value) return;
-
 	const ele = document.getElementById(`nav-button-${inViewSection.value}`);
 	const toolbar = document.getElementById('toolbar');
 	const slider = document.getElementById('slider');
@@ -363,6 +361,14 @@ watch(inViewSection, () => {
 	background-color: #ffffffcc;
 }
 
+.open-menu-toggle {
+	position: absolute;
+	width: 55px;
+	height: 55px;
+	right: 10px;
+	top: 2px;
+}
+
 .equalizer-visual {
 	margin: 0 15px;
 	cursor: pointer;
@@ -378,13 +384,5 @@ watch(inViewSection, () => {
 
 .equalizer-visual:hover {
 	background-color: #ffffff55;
-}
-
-.menu-toggle-btn {
-	position: absolute;
-	width: 55px;
-	height: 55px;
-	right: 10px;
-	top: 2px;
 }
 </style>

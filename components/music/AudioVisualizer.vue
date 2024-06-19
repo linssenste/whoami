@@ -1,69 +1,68 @@
 <template>
 	<div class="audio-equalizer">
 		<div v-for="i in 4" :key="i" :data-testid="`visualizer-${i}`"
-			 :style="{ animationDelay: getDelay(), backgroundColor: getColor(i) }" class="audio-visualizer"
+			 :style="{ animationDelay: delays[i - 1], backgroundColor: getColor(i) }" class="audio-visualizer"
 			 :class="!playing ? 'pause' : 'play'" />
 	</div>
 </template>
 
-
 <script setup lang="ts">
+import { ref, computed } from 'vue';
 
+// Define props
 const props = defineProps<{
 	playing: boolean
 }>();
 
+// Define color array and shuffle it
 const colors = ["red", "blue", "pink", "purple", "green", "orange"];
-const shuffledColors = ref(shuffleArray([...colors]));
+const shuffledColors = useState<string[]>('shuffledColors', () => shuffleArray([...colors]));
 
+// Compute static delays during setup to ensure consistency
+const delays = useState<string[]>('delays', () => generateDelays(4));
 
-// set random transition delay to achieve equalizer effect
-function getDelay(): string {
-	const randomDelay = 100 + Math.random() * 750;
-	return !props.playing ? 'infinite' : `${randomDelay}ms`;
-}
-
+// Function to shuffle an array
 function shuffleArray(array: string[]): string[] {
 	return array.sort(() => 0.5 - Math.random());
 }
 
-// get random color
-function getColor(index: number): string {
-	return `var(--${shuffledColors.value[index % shuffledColors.value.length]}-color)`;
+// Function to generate delays
+function generateDelays(length: number): string[] {
+	return Array.from({ length }, () => {
+		const randomDelay = 100 + Math.random() * 750;
+		return `${randomDelay}ms`;
+	});
 }
+
+// Computed property for colors
+const getColor = (index: number): string => {
+	return `var(--${shuffledColors.value[index % shuffledColors.value.length]}-color)`;
+};
 </script>
-
-
 
 <style scoped>
 .pause {
 	animation: none !important;
-
 	height: 6px;
 }
 
 .play {
-
 	height: 20px !important;
-
 	animation: equalizer .75s infinite;
 	-moz-animation: equalizer .75s infinite;
 	-webkit-animation: equalizer .75s infinite;
-
 }
 
 .audio-equalizer {
 	display: flex;
 	flex-direction: row;
 	gap: 4px;
-
 }
 
 .audio-visualizer {
 	width: 8px;
 	height: 8px;
 	border-radius: 4px;
-
 	transition: all 150ms ease-in-out;
 	overflow: hidden;
 	transform-origin: center;
@@ -76,7 +75,6 @@ function getColor(index: number): string {
 
 	0%,
 	100% {
-
 		border-radius: 4px;
 		transform: scaleY(1);
 		-webkit-transform: scaleY(1);
@@ -84,7 +82,6 @@ function getColor(index: number): string {
 	}
 
 	25% {
-
 		border-radius: 3px;
 		transform: scaleY(1.5);
 		-webkit-transform: scaleY(1.5);
@@ -93,7 +90,6 @@ function getColor(index: number): string {
 
 	75% {
 		border-radius: 6px;
-
 		transform: scaleY(0.6);
 		-webkit-transform: scaleY(.6);
 		-moz-transform: scaleY(.6);
