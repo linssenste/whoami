@@ -1,6 +1,6 @@
 <template>
 	<div style="position: relative; height: fit-content;">
-		<Risographic />
+		<Risographic style="margin-top: -50px;" />
 		<MusicAlbumCoverBanner :isPlaying="isPlaying" style="margin-top: -350px; z-index: 2"
 							   v-on:track-selected="selectedTrack = $event" />
 		<!-- <MusicAlbumCover style="margin-top: -300px" :src="cover" :status="{ selected: false, playing: true }" /> -->
@@ -13,8 +13,13 @@
 			<PolaroidImage v-lazy-load src="/polaroids/music/polaroid-1.webp" alt="" />
 			<PolaroidImage v-lazy-load src="/polaroids/music/polaroid-2.webp" alt="" />
 			<PolaroidImage v-lazy-load src="/polaroids/music/polaroid-3.webp" alt="" />
+			<PolaroidImage v-lazy-load src="/polaroids/music/polaroid-2.webp" alt="" />
+			<PolaroidImage v-lazy-load src="/polaroids/music/polaroid-3.webp" alt="" />
 
 		</div>
+
+		<!-- <Risographic style="margin-top: -350px;" /> -->
+
 	</div>
 </template>
 
@@ -32,6 +37,7 @@ watch(isPlaying, () => {
 
 <style scoped>
 .music-love-images {
+	z-index: 100 !important;
 	display: flex;
 	flex-direction: row;
 	align-items: center;

@@ -7,11 +7,15 @@
 		<LayoutToolbar style="margin-bottom: 40px;" :playing="isPlaying" />
 		<MusicSection id="analysis-section" v-on:playing="isPlaying = $event" />
 
-		<div id="portfolio-section" style="width: 100%; height: 900px; background-color: purple;"></div>
 
+		<!-- <AboutMeSection /> -->
 
+		<TruthLieSection id="personal-section" />
+		<PortfolioTimeline id="portfolio-section" />
 		<div id="other-section" style="width: 100%; height: 900px; background-color: grey;"></div>
-		<!-- <PortfolioTimeline /> -->
+
+
+
 
 	</div>
 </template>

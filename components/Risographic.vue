@@ -10,12 +10,23 @@
 
 const imageContainerRef = ref<HTMLElement | null>(null);
 
-// risographic image parallex effect
-const handleScroll = () => {
-	if (!imageContainerRef.value) return
 
-	imageContainerRef.value.style.transform = `translateY(-${window.scrollY * 0.1}px)`;
+const handleScroll = () => {
+	if (!imageContainerRef.value) return;
+
+	// Get the bounding rectangle of the header
+	const rect = imageContainerRef.value.getBoundingClientRect();
+
+	// Adjust parallax speed if needed
+	const parallaxSpeed = 0.15;
+
+	// Calculate new transform value based on the top position relative to the viewport
+	const translateY = rect.top * parallaxSpeed // Cap the translation to 100px or any desired value
+
+	// Apply transform
+	imageContainerRef.value.style.transform = `translateY(${translateY}px)`;
 };
+
 
 onMounted(() => {
 	handleScroll();

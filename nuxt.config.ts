@@ -39,5 +39,5 @@ export default defineNuxtConfig({
 	directiveOnly: true,
   },
   
-  css: ['~/assets/css/main.css', '~/assets/font/buttons/stylesheet.css', '~/assets/font/biro/stylesheet.css', '~/assets/font/text/stylesheet.css']
+  css: ['~/assets/css/main.css', '~/assets/font/buttons/stylesheet.css', '~/assets/font/biro/stylesheet.css', '~/assets/font/text/stylesheet.css',  '~/assets/font/smothy/stylesheet.css']
 })

@@ -62,8 +62,8 @@ import '../../assets/css/menu-icon.css';
 const sections = ref([
 	{ name: 'Hallo', id: 'welcome-section', offset: 0 },
 	{ name: 'Playlist', id: 'analysis-section', offset: 580 },
+	{ name: '2 truth & a lie', id: 'personal-section', offset: 0 },
 	{ name: 'Portfolio', id: 'portfolio-section', offset: 0 },
-	{ name: 'About me', id: 'other-section', offset: 0 },
 	{ name: 'Contact me', id: 'contact-section', offset: 0 }
 ]);
 
