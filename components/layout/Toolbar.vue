@@ -175,7 +175,7 @@ watch(inViewSection, () => {
 <style scoped>
 .toolbar {
 	position: sticky;
-	top: 0px;
+	top: 10px;
 	display: flex;
 	z-index: 100;
 	justify-content: center;
@@ -305,12 +305,10 @@ watch(inViewSection, () => {
 .menu-bar {
 	width: fit-content;
 	position: relative;
-	height: 60px;
 	background-color: #e0e0e0aa;
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
 	z-index: 100;
-	top: 15px;
 	border-radius: 30px;
 	overflow: hidden;
 	display: flex;
@@ -327,6 +325,7 @@ watch(inViewSection, () => {
 	letter-spacing: 1.5px;
 	text-transform: uppercase;
 	z-index: 20;
+	margin: 10px 0px 10px 0px;
 	/* outline: none; */
 	font-family: 'Mukta';
 	font-weight: 400;

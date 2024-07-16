@@ -8,7 +8,7 @@ export default defineNuxtConfig({
 	  }
   },
   plugins: [
-    '~/plugins/random-favicon.client.ts',
+    '~/plugins/random-favicon.client.ts'
   ],
   components: [
     // Auto-import components in the components directory
@@ -26,9 +26,7 @@ export default defineNuxtConfig({
       ]
     }
   },
-  modules: [
-	'nuxt-lazy-load'
-  ],
+  modules: ['nuxt-lazy-load'],
   lazyLoad: {
 	// These are the default values
 	images: false,
@@ -38,6 +36,6 @@ export default defineNuxtConfig({
 	native: false,
 	directiveOnly: true,
   },
-  
+
   css: ['~/assets/css/main.css', '~/assets/font/buttons/stylesheet.css', '~/assets/font/biro/stylesheet.css', '~/assets/font/text/stylesheet.css',  '~/assets/font/smothy/stylesheet.css']
 })
