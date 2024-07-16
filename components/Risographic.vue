@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 
 const imageContainerRef = ref<HTMLElement | null>(null);
-
+let initalRectOffset = 0;
 
 const handleScroll = () => {
 	if (!imageContainerRef.value) return;
@@ -18,17 +18,20 @@ const handleScroll = () => {
 	const rect = imageContainerRef.value.getBoundingClientRect();
 
 	// Adjust parallax speed if needed
-	const parallaxSpeed = 0.15;
+	const parallaxSpeed = 0.1;
 
 	// Calculate new transform value based on the top position relative to the viewport
-	const translateY = rect.top * parallaxSpeed // Cap the translation to 100px or any desired value
+	const translateY = (rect.top - initalRectOffset) * parallaxSpeed // Cap the translation to 100px or any desired value
 
 	// Apply transform
 	imageContainerRef.value.style.transform = `translateY(${translateY}px)`;
 };
 
-
 onMounted(() => {
+	if (!imageContainerRef.value) return;
+
+	initalRectOffset = imageContainerRef.value.getBoundingClientRect().top;
+
 	handleScroll();
 	window.addEventListener('scroll', handleScroll);
 });
@@ -40,6 +43,8 @@ onUnmounted(() => {
 
 <style scoped>
 .art-image-container {
+
+	padding-top: 50px;
 	z-index: 0;
 	display: flex;
 	background-color: transparent;
