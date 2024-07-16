@@ -30,7 +30,7 @@ const handleScroll = () => {
 onMounted(() => {
 	if (!imageContainerRef.value) return;
 
-	initalRectOffset = imageContainerRef.value.getBoundingClientRect().top;
+	initalRectOffset = window.scrollY + imageContainerRef.value.getBoundingClientRect().top;
 
 	handleScroll();
 	window.addEventListener('scroll', handleScroll);
