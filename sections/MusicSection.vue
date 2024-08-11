@@ -13,8 +13,6 @@
 			<PolaroidImage v-lazy-load src="/polaroids/music/polaroid-1.webp" alt="" />
 			<PolaroidImage v-lazy-load src="/polaroids/music/polaroid-2.webp" alt="" />
 			<PolaroidImage v-lazy-load src="/polaroids/music/polaroid-3.webp" alt="" />
-			<PolaroidImage v-lazy-load src="/polaroids/music/polaroid-2.webp" alt="" />
-			<PolaroidImage v-lazy-load src="/polaroids/music/polaroid-3.webp" alt="" />
 
 		</div>
 

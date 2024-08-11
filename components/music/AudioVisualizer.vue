@@ -29,7 +29,7 @@ function shuffleArray(array: string[]): string[] {
 // Function to generate delays
 function generateDelays(length: number): string[] {
 	return Array.from({ length }, () => {
-		const randomDelay = 100 + Math.random() * 750;
+		const randomDelay = Math.random() * 1000;
 		return `${randomDelay}ms`;
 	});
 }
