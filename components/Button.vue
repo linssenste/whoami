@@ -5,7 +5,7 @@
 			<span class="icon arrow"></span>
 		</span>
 		<span class="button-text" :style="`color: var(--${color ?? 'black'}-color)`">
-			{{ text }} lksms
+			{{ text }}
 		</span>
 	</button>
 

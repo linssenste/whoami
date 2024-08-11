@@ -1,4 +1,4 @@
-a<template>
+<template>
 	<div style=" width: 100%; margin-bottom: 150px;">
 		<div class="bubbly-header" ref="headerRef">
 			2 TRUTH <span style="color: var(--blue-color)">& A LIE</span>
@@ -44,7 +44,7 @@ onUnmounted(() => {
 	font-size: 140px;
 	line-height: 150px;
 	margin-bottom: 100px;
-	color: var(--orange-color);
+	color: var(--red-color);
 	position: relative;
 	/* Ensure it's positioned relative to its container */
 	transition: transform 0.1s ease-out;

@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div id="analysis-description">
 
-		<LayoutKeepScrollingAnimation class="scrolling-hint" />
+		<LayoutKeepScrollingAnimation class="scrolling-hint" :is-click="false" text="KEEP SCROLLING" />
 
 		<h1>Get to know me through music!</h1>
 
@@ -98,6 +98,10 @@ const featureLabel = (labelId: string, inverted: boolean = false) => {
 </script>
 
 <style scoped>
+#analysis-description {
+	position: relative;
+}
+
 .scrolling-hint {
 	margin-top: 100px;
 	margin-bottom: 50px;
