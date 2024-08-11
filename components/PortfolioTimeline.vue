@@ -1,58 +1,69 @@
 <template>
 
 
-	<div>
-		<LayoutStepScroller :steps="3" id="me" text-side="left">
+	<div style="padding-top: 100px;">
+		<LayoutStepScroller :steps="5" id="me" text-side="left" :inline="true">
+
 			<template v-slot:me-step-1>
 				<iframe src="https://instax.linssenste.dev/?embed=red"
-						style="width: 100%; border-radius: 12px; height: 650px; border: none; outline: none; background-color: var(--light-grey-color);" />
-
+						style="width: 100%; margin-top: 150px; border-radius: 12px; height: 650px; border: none; outline: none; background-color: var(--light-grey-color);" />
 			</template>
 
 
 			<template v-slot:me-step-2="{ visible }">
-				<PortfolioGeoDalliDalliProject :visible="visible" />
-
+				<div style="max-width: 500px; width: calc(100% - 20px); aspect-ratio: 1/1; margin: 0 auto">
+					<PortfolioGeoDalliDalliProject :visible="visible" />
+				</div>
 			</template>
 
 			<template v-slot:me-step-3>
+
 				<div
-					 style="width: 100%; border-radius: 12px; height: 650px; border: none; outline: none; background-color: var(--light-grey-color);">
+					 style="position: relative; width: 100%; border-radius: 12px; height: 650px; border: none; outline: none; background-color: var(--light-grey-color);">
 
-					MAP WITH BIKE RIDER ANIMATION
 				</div>
 
 			</template>
 
-			<!-- <template v-for="index in 2" :key="index" v-slot:[`me-step-${index + 1}`]>
-			<div :id="`me-step-${index}`" style="width: 100%; height: 500px; background-color: lightcoral;">{{
-		index }}
-			</div>
-		</template> -->
 
-			<template v-slot:text="{ focus }">
+			<template v-slot:me-step-4>
 
-				<div class="project-description">
-					jdkd {{ focus }}
-
-
-					<div v-if="focus == 1">
-						INSTAX
-					</div>
-
-					<div v-else-if="focus == 2">
-						hallo <span>test</span>
-					</div>
-
-					<div v-else-if="focus == 3">
-						Letzte Card
-					</div>
+				<div
+					 style="width: 100%; border-radius: 12px; height: 650px; border: none; outline: none; background-color: ">
+					ALinoplan
 				</div>
+
 			</template>
+
+
+			<template v-slot:me-step-5>
+
+				<div
+					 style="width: 100%; border-radius: 12px; height: 650px; border: none; outline: none; background-color: var(--light-grey-color)">
+					ALinoplan
+				</div>
+
+			</template>
+
+			<template v-slot:me-text-1>
+				<PortfolioDescriptionFilmText />
+			</template>
+			<template v-slot:me-text-2>
+				<PortfolioDescriptionGeoText />
+			</template>
+
+
+
+			<template v-slot:me-text-3>
+				<PortfolioDescriptionBikeText />
+			</template>
+
 		</LayoutStepScroller>
 	</div>
 
 </template>
+
+
 
 
 <style scoped>
@@ -61,6 +72,7 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	width: 100%;
 	transform: translate(-50%, -50%);
 }
 </style>

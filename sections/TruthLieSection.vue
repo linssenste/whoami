@@ -1,10 +1,7 @@
 <template>
 
-	<div class="lie-game">
+	<div class="lie-game" ref="lieGameRef">
 
-		<div
-			 style="background-color: var(--orange-color); position: absolute; top: 0px; height: 100%; width: 100%; left: 0;; opacity: .2;">
-		</div>
 		<TruthHeader />
 
 		<div class="wrapper">
@@ -31,7 +28,36 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+
+const lieGameRef = ref<HTMLElement | null>(null);
+onMounted(() => {
+	if (!lieGameRef.value) return;
+
+	let lastPosition = 0;
+
+	function handleScroll(event: Event) {
+		const rect = lieGameRef.value?.getBoundingClientRect();
+
+		if (!rect || !lieGameRef.value) return;
+
+		lieGameRef.value.style.opacity = (1 - Math.abs(((rect.y + 400) / rect.height)));
+
+		console.log(lieGameRef.value.style.opacity)
+		// console.log(rect?.height, rect.y)
+
+		lastPosition = rect.y
+		// fade in or fade out background ()
+	}
+	const observer = new IntersectionObserver(([entry]) => {
+
+		if (entry.isIntersecting) window.addEventListener('scroll', handleScroll)
+		else window.removeEventListener('scroll', handleScroll)
+
+		// entry.isIntersecting ? startAutoScroll() : scrollingInterval && clearInterval(scrollingInterval)
+	}, { threshold: 0 })
+	observer.observe(lieGameRef.value)
+})
+
 import JSConfetti from 'js-confetti'
 
 
@@ -84,20 +110,47 @@ function setAnswer(index?: number) {
 
 
 }
+
+
 </script>
 
 
 <style scoped>
 .lie-game {
 	position: relative;
-	/* padding-top: 100px; */
-	/* height: 600px; */
-	padding-bottom: 200px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	width: 100%;
+	min-height: calc(100vh + 500px);
+	/* background-color: #e0e0e0; */
+	padding-top: 400px;
 }
+
+/* Gradient for the top */
+.lie-game:before {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
+	width: 100%;
+	height: 500px;
+
+}
+
+/* Gradient for the bottom */
+.lie-game:after {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
+	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
+	width: 100%;
+	height: 50px;
+}
+
 
 .wrapper {
 	position: relative;

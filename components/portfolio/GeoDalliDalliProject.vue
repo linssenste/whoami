@@ -1,55 +1,40 @@
 <template>
+
 	<div
-		 style="width: 100%; border-radius: 12px; height: 100%; border: none; outline: none; background-color: transparent">
-		GEO DALLI DALLI
+		 style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px">
+		<div class="game-container">
 
-		<div class="geo-quiz">
-			<div
-				 style="width: 350px!important; min-width: 350px; height: 350px; background-color: grey; border-radius: 12px;">
-			</div>
 
-			<div class="options-column">
-				<button v-for="index in 4">
-					<b style="margin-right: 10px;">{{ index }}</b> Option nummer 1
-				</button>
-			</div>
+			<iframe width="100%" height="100%" class="game-embed"
+					src="http://localhost:5173/viewer?embed=10&image=https%3A%2F%2Fsalva-hundehilfe.de%2Fwp-content%2Fuploads%2F2024%2F04%2Fjasper-cj-2404-1.jpg&interval=0&shapes=50&type=hexagon"></iframe>
+
 		</div>
+		<LayoutKeepScrollingAnimation :isClick="true" text="Click tiles to reveal image" />
 	</div>
-
 </template>
 
+<script lang="ts" setup>
+
+
+</script>
 
 <style scoped>
-.geo-quiz {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-
-.options-column {
-	width: 100%;
+.game-container {
 	position: relative;
-	padding: 20px;
-	gap: 20px;
-	display: flex;
-	flex-direction: column
-}
-
-.options-column button {
-	background-color: #e0e0e0;
-	border: none;
+	border: 8px solid #c0c0c0 !important;
 	width: 100%;
+	height: 500px;
+	max-height: 100%;
+
 	border-radius: 12px;
-	height: 50px;
-	color: var(--red-color);
-	font-size: 17px;
-	cursor: pointer;
-	transition: all 150ms ease-in-out;
+	outline: none;
+	background-color: transparent;
+	overflow: hidden;
 }
 
-.options-column button:hover {
-
-	background-color: var(--red-color);
-	color: white;
+.game-embed {
+	border-radius: 4px !important;
+	border: none;
+	outline: none
 }
 </style>
