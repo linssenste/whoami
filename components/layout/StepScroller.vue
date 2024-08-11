@@ -3,10 +3,18 @@
 		<div class="scrollable-content" ref="scrollSideRef">
 			<div v-for="step in steps" :id="String(step)" class="content" :style="isVisible(step)">
 				<slot :name="`${id}-step-${step}`" :visible="currentFocus == step" :index="step" />
+				<slot v-if="isMobile" :name="`${id}-text-${step}`" :index="step" />
 			</div>
 		</div>
 		<div class="fixed-content" :class="{ 'left-bound': isTextSideLeft }" ref="textSideRef">
-			<slot name="text" :focus="currentFocus" />
+			<slot v-if="inline != true" name="text" :focus="currentFocus" />
+			<div v-else-if="!isMobile" class="inline-text">
+				<transition name="fade-move" mode="out-in">
+					<div :key="currentFocus">
+						<slot :name="`${id}-text-${currentFocus}`" :key="currentFocus" />
+					</div>
+				</transition>
+			</div>
 		</div>
 	</div>
 </template>
@@ -15,6 +23,7 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 
 const props = defineProps<{
+	inline?: boolean,
 	steps: number;
 	textSide: 'left' | 'right';
 	id: string;
@@ -73,7 +82,6 @@ const handleScroll = () => {
 		textSideRef.value.style.position = 'relative';
 	}
 };
-
 
 onMounted(() => {
 	window.addEventListener('scroll', handleScroll);
@@ -147,7 +155,6 @@ onUnmounted(() => {
 }
 
 @media screen and (max-width: 1000px) {
-
 	.scrollable-content .content:last-child {
 		padding-bottom: 0px;
 	}
@@ -159,13 +166,30 @@ onUnmounted(() => {
 	}
 }
 
-
 @media screen and (min-width: 1000px) {
-
 	.fixed-content {
-
 		min-height: 100vh;
 		height: 100vh;
 	}
+}
+
+.inline-text {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: start;
+	height: 100%;
+}
+
+.fade-move-enter-active,
+.fade-move-leave-active {
+	transition: opacity 0.3s, transform 0.3s;
+}
+
+.fade-move-enter,
+.fade-move-leave-to {
+	opacity: 0;
+	transform: translateY(10px);
 }
 </style>
