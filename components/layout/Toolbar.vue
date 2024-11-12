@@ -62,8 +62,8 @@ import '../../assets/css/menu-icon.css';
 const sections = ref([
 	{ name: 'Hallo', id: 'welcome-section', offset: 0 },
 	{ name: 'Playlist', id: 'analysis-section', offset: 580 },
-	{ name: '2 truth & a lie', id: 'personal-section', offset: 0 },
-	{ name: 'Portfolio', id: 'portfolio-section', offset: 0 },
+	{ name: 'Reisen', id: 'travel-section', offset: -75 },
+	{ name: 'Polaroids', id: 'polaroid-section', offset: -20 },
 	{ name: 'Contact me', id: 'contact-section', offset: 0 }
 ]);
 
@@ -180,6 +180,7 @@ watch(inViewSection, () => {
 	z-index: 100;
 	justify-content: center;
 	width: 100%;
+	pointer-events: none;
 	transition: all 0.2s ease-in-out;
 }
 
@@ -305,6 +306,7 @@ watch(inViewSection, () => {
 .menu-bar {
 	width: fit-content;
 	position: relative;
+	pointer-events: all !important;
 	background-color: #e0e0e0aa;
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
