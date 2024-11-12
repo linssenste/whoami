@@ -1,5 +1,5 @@
 <template>
-	<div class="art-image-container" ref="imageContainerRef">
+	<div class="art-image-container" id="risographic-image">
 		<img data-not-lazy data-testid="risograph-image" height="100%" fetchpriority="high" preload preconnect
 			 alt="colorful rounded forms in risographic style with the letter S and L in the center"
 			 src="../assets/images/risograph.svg" class="art-image" />
@@ -7,38 +7,8 @@
 </template>
 
 <script lang="ts" setup>
+useParrallexScroll('risographic-image', 0.085);
 
-const imageContainerRef = ref<HTMLElement | null>(null);
-let initalRectOffset = 0;
-
-const handleScroll = () => {
-	if (!imageContainerRef.value) return;
-
-	// Get the bounding rectangle of the header
-	const rect = imageContainerRef.value.getBoundingClientRect();
-
-	// Adjust parallax speed if needed
-	const parallaxSpeed = 0.1;
-
-	// Calculate new transform value based on the top position relative to the viewport
-	const translateY = (rect.top - initalRectOffset) * parallaxSpeed // Cap the translation to 100px or any desired value
-
-	// Apply transform
-	imageContainerRef.value.style.transform = `translateY(${translateY}px)`;
-};
-
-onMounted(() => {
-	if (!imageContainerRef.value) return;
-
-	initalRectOffset = window.scrollY + imageContainerRef.value.getBoundingClientRect().top;
-
-	handleScroll();
-	window.addEventListener('scroll', handleScroll);
-});
-
-onUnmounted(() => {
-	window.removeEventListener('scroll', handleScroll);
-});
 </script>
 
 <style scoped>
