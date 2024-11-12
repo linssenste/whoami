@@ -27,7 +27,7 @@ onMounted(() => {
 	// initalizing tilt functionality (only on non-touch devices)
 	VanillaTilt.init(polaroidRef.value, {
 		max: 5,
-		speed: 1000,
+		speed: 100,
 		reverse: true,
 
 		glare: true,
