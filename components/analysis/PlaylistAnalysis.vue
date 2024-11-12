@@ -1,5 +1,5 @@
 <template>
-	<LayoutStepScroller :steps="7" text-side="right" id="music">
+	<LayoutStepScroller :steps="8" text-side="right" id="music">
 
 		<template v-slot:music-step-1>
 
@@ -47,6 +47,10 @@
 
 		<!-- step 7: cloned jupyter cell with link to notebook on github -->
 		<template v-slot:music-step-7="{ visible }">
+			<PolaroidSnapSlider :polaroids="polaroids" />
+		</template>
+		<!-- step 8: cloned jupyter cell with link to notebook on github -->
+		<template v-slot:music-step-8="{ visible }">
 			<AnalysisJupyterCell style="margin: 10px;" :visible="visible" />
 		</template>
 
@@ -66,6 +70,11 @@ import analysisData from '../../assets/analysis/export-spotify-analysis.json'
 import covers from '../../assets/analysis/export-spotify-covers.json'
 
 
+const polaroids = [
+	{ src: '/polaroids/music/polaroid-1.webp', alt: '' },
+	{ src: '/polaroids/music/polaroid-2.webp', alt: '' },
+	{ src: '/polaroids/music/polaroid-3.webp', alt: '' }
+]
 export interface ArtistStatsElement {
 	img: string;
 	tracks: number;
