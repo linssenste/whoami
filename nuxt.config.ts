@@ -3,9 +3,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   nitro: {
     compressPublicAssets: true,
-	prerender: {
-		crawlLinks: true
-	  }
+    prerender: {
+        crawlLinks: true
+      }
   },
   plugins: [
     '~/plugins/random-favicon.client.ts'
@@ -26,16 +26,16 @@ export default defineNuxtConfig({
       ]
     }
   },
-  modules: ['nuxt-lazy-load'],
+  modules: ['nuxt-lazy-load', '@nuxtjs/leaflet'],
   lazyLoad: {
-	// These are the default values
-	images: false,
-	videos: false,
-	audios: false,
-	iframes: false,
-	native: false,
-	directiveOnly: true,
+    // These are the default values
+    images: false,
+    videos: false,
+    audios: false,
+    iframes: false,
+    native: false,
+    directiveOnly: true,
   },
 
-  css: ['~/assets/css/main.css', '~/assets/font/buttons/stylesheet.css', '~/assets/font/biro/stylesheet.css', '~/assets/font/text/stylesheet.css',  '~/assets/font/smothy/stylesheet.css']
+  css: ['~/assets/css/main.css', '~/assets/font/buttons/stylesheet.css', '~/assets/font/biro/stylesheet.css', '~/assets/font/text/stylesheet.css']
 })
