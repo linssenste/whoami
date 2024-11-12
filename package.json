@@ -12,6 +12,7 @@
 		"lhci:desktop": "lhci autorun --collect.settings.preset=desktop"
 	},
 	"dependencies": {
+		"@nuxtjs/leaflet": "^1.2.2",
 		"apexcharts": "^3.49.2",
 		"js-confetti": "^0.12.0",
 		"nuxt": "^3.12.2",
