@@ -6,7 +6,7 @@
 				<DynamicScrollerItem :item="item" :active="active" :data-index="index" :data-active="active"
 									 class="cover-item" @click="selectCover(item)">
 					<MusicAlbumCover :src="item" :key="index"
-									 :status="{ playing: isPlaying, selected: albumId == item.id }" />
+									 :status="{ playing: store.isPlaying, selected: store.selectedAlbum?.id == item.id }" />
 				</DynamicScrollerItem>
 			</template>
 		</DynamicScroller>
@@ -15,13 +15,13 @@
 		<div v-if="!isTouchDevice" @mouseenter="startManualScroll(false)" @mouseleave="finishManualScroll"
 			 class="hover-scroll-pad left">
 			<span class="icon"></span>
-
 		</div>
+
 		<div v-if="!isTouchDevice" @mouseenter="startManualScroll(true)" @mouseleave="finishManualScroll"
 			 class="hover-scroll-pad right">
 			<span class="icon"></span>
-
 		</div>
+
 	</div>
 </template>
 
@@ -31,10 +31,9 @@ import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import type { AlbumCover } from './AlbumCover.vue';
 
-const emit = defineEmits(['track-selected']);
+import { useStore } from '@/store'
 
-const props = defineProps<{ isPlaying: boolean }>();
-props.isPlaying
+const store = useStore()
 
 const { isTouchDevice } = useDeviceDetection();
 
@@ -44,15 +43,11 @@ const randomAlbumCovers = computed(() => {
 })
 const coverAreaRef = ref<HTMLElement | null>(null)
 
-const selectedTrack = ref<string | null>(null)
-const albumId = ref<string | null>(null)
 
+let hasManualScrolled = false
 
 const selectCover = (item: AlbumCover) => {
-
-	albumId.value = item.id
-	selectedTrack.value = item.tracks[Math.floor(Math.random() * item.tracks.length)]
-	emit('track-selected', selectedTrack.value)
+	store.changeTrack(item)
 }
 
 // (auto) scrolling 
@@ -63,6 +58,9 @@ let isManualScrolling: boolean = false
 onMounted(() => {
 	if (!coverAreaRef.value) return
 
+	store.setCovers(covers);
+
+	store.shuffleTracks()
 	const observer = new IntersectionObserver(([entry]) => {
 		entry.isIntersecting ? startAutoScroll() : scrollingInterval && clearInterval(scrollingInterval)
 	}, { threshold: 0 })
@@ -70,7 +68,10 @@ onMounted(() => {
 
 	const container = document.getElementById('cover-banner-container')
 	if (container) container.scrollLeft = 85
+
+
 })
+
 
 onUnmounted(() => {
 	if (scrollingInterval) clearInterval(scrollingInterval)
@@ -91,7 +92,7 @@ const finishManualScroll = () => {
 }
 
 const startAutoScroll = () => {
-	if (isTouchDevice.value) return
+	if (hasManualScrolled && isTouchDevice.value) return
 
 	const container = document.getElementById('cover-banner-container')
 	if (!container) return

@@ -26,7 +26,7 @@ export default defineNuxtConfig({
       ]
     }
   },
-  modules: ['nuxt-lazy-load', '@nuxtjs/leaflet'],
+  modules: ['nuxt-lazy-load', '@nuxtjs/leaflet', '@pinia/nuxt'],
   lazyLoad: {
     // These are the default values
     images: false,

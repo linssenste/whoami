@@ -1,84 +1,119 @@
 <template>
-	<div class="toolbar">
 
-		<!-- desktop toolbar (sticky) -->
-		<div class="menu-bar" id="toolbar">
+	<div class="toolbar" v-show="!isMobile">
 
-			<!-- menu buttons in row -->
-			<button v-for="section in sections" :tabindex="0" :key="section.id" :id="`nav-button-${section.id}`"
-					@click="scrollSection(section.id)" class="nav-element">
-				{{ section.name }}
-			</button>
+		<div class="toolbar-selection">
 
-			<!-- qualizier indicating if music is playing  -->
-			<div class="equalizer-visual" :tabindex="0" @click="scrollSection('analysis-section')">
-				<MusicAudioVisualizer :playing="playing" title="Music player" />
-			</div>
+			<!-- desktop toolbar (sticky) -->
+			<div class="menu-bar" id="toolbar">
 
-			<!-- slider alsways sliding to active section -->
-			<div id="slider" class="active-slider" />
-		</div>
+				<!-- menu buttons in row -->
+				<button v-for="section in sections" :tabindex="0" :key="section.id" :id="`nav-button-${section.id}`"
+						@click="scrollSection(section.id)" class="nav-element">
+					{{ section.name }}
+				</button>
 
-
-
-		<!-- mobile toolbar (fixed) -->
-		<div class="mobile-menu-bar" :class="{ 'menu-expanded': expandMobileMenu }">
-			<div class="mobile-header">
-				<!-- equalizer (indicating if music is playing or not) -->
-				<div class="equalizer-visual" @click="scrollSection('analysis-section')">
-					<MusicAudioVisualizer :playing="playing" title="Music player" />
-				</div>
-			</div>
-			<div class="mobile-navigation">
-
-				<!-- menu buttons in columns -->
-				<div class="mobile-nav-buttons" :class="{ 'hide-navigation': !expandMobileMenu }">
-					<button v-for="section in sections" :key="section.id" :id="`mobile-nav-button-${section.id}`"
-							@click="scrollSection(section.id)" class="nav-element"
-							:class="{ 'mobile-active': inViewSection === section.id }">
-						{{ section.name }}
-					</button>
+				<!-- qualizier indicating if music is playing  -->
+				<div class="equalizer-visual" v-on:mousemove="showMusicPlayer(true)"
+					 v-on:mouseleave="showMusicPlayer(false)" :tabindex="0" @click="store.shuffleTracks()">
+					<MusicAudioVisualizer :playing="store.isPlaying" title="Music player" />
 				</div>
 
+				<!-- slider alsways sliding to active section -->
+				<div id="slider" class="active-slider" />
+
 
 			</div>
 
-			<!-- toggle mobilemenu button -->
-			<div class="open-menu-toggle">
-				<input type="checkbox" v-model="expandMobileMenu" id="menu">
-				<label for="menu" class="mobile-icon">
-					<div class="mobile-menu"></div>
-				</label>
+			<!-- music player hover menu - only appears on hover on equalizer -->
+			<div class="music-player-menu" v-on:mousemove="showMusicPlayer(true)"
+				 v-on:mouseleave="showMusicPlayer(false)" :class="{ 'hide-menu': !showMenu }">
+				<ClientOnly>
+					<MusicSpotifyPlayer v-if="store.trackId != null && store.trackId.length > 0"
+										playerId="music-player-1" />
+				</ClientOnly>
 			</div>
-
-
 		</div>
 	</div>
+
+
+
+	<!-- mobile toolbar (fixed) -->
+	<div v-show="isMobile" class="mobile-menu-bar" :class="{ 'menu-expanded': expandMobileMenu }">
+		<div class="mobile-header">
+			<!-- equalizer (indicating if music is playing or not) -->
+			<div class="equalizer-visual" @click="scrollSection('analysis-section')">
+				<MusicAudioVisualizer :playing="store.isPlaying" title="Music player" />
+			</div>
+		</div>
+
+		<div class="mobile-navigation" :class="{ 'hide-navigation': !expandMobileMenu }">
+
+
+			<!-- menu buttons in columns -->
+			<div class="mobile-nav-buttons">
+
+				<button v-for="section in sections" :key="section.id" :id="`mobile-nav-button-${section.id}`"
+						@click="scrollSection(section.id)" class="nav-element"
+						:class="{ 'mobile-active': inViewSection === section.id }">
+					{{ section.name }}
+				</button>
+
+
+			</div>
+
+			<div class="mobile-music-player">
+				<ClientOnly>
+					<MusicSpotifyPlayer v-if="store.trackId != null && store.trackId.length > 0"
+										playerId="music-player-2" />
+				</ClientOnly>
+			</div>
+		</div>
+
+		<!-- toggle mobilemenu button -->
+		<div class="open-menu-toggle">
+			<input type="checkbox" v-model="expandMobileMenu" id="menu">
+			<label for="menu" class="mobile-icon">
+				<div class="mobile-menu"></div>
+			</label>
+		</div>
+
+	</div>
+
 </template>
 
 <script lang="ts" setup>
 import '../../assets/css/menu-icon.css';
+import { useStore } from '@/store'
 
+const showMenu = ref(false);
 const sections = ref([
-	{ name: 'Hallo', id: 'welcome-section', offset: 0 },
+	{ name: 'Hello', id: 'welcome-section', offset: 0 },
 	{ name: 'Playlist', id: 'analysis-section', offset: 580 },
-	{ name: 'Reisen', id: 'travel-section', offset: -75 },
+	{ name: 'Adventure', id: 'travel-section', offset: -75 },
 	{ name: 'Polaroids', id: 'polaroid-section', offset: -20 },
-	{ name: 'Contact me', id: 'contact-section', offset: 0 }
+	{ name: 'Fun Facts', id: 'facts-section', offset: 0 }
 ]);
 
-const props = defineProps<{
-	playing: boolean
-}>();
-props.playing;
 
 const expandMobileMenu = ref(false);
-
-
 
 const inViewSection = ref(sections.value[0].id);
 const isScrolling = ref(false);
 const { isMobile } = useDeviceDetection();
+
+const store = useStore();
+
+
+watch(() => store.trackId, (newTrackId, prevTrackId) => {
+
+	if (prevTrackId.length > 0 && store.trackId != null && store.trackId.length > 0) {
+		showMusicPlayer(true);
+		setTimeout(() => {
+			showMusicPlayer(false);
+		}, 1000);
+	}
+});
 
 
 // scroll to section on page
@@ -99,7 +134,16 @@ const scrollTo = (offset: number, callback: () => void) => {
 	});
 };
 
+let timeout: ReturnType<typeof setTimeout> | null = null;
 
+function showMusicPlayer(show: boolean) {
+
+	if (timeout) clearTimeout(timeout);
+	timeout = setTimeout(() => {
+		showMenu.value = show;
+	}, show ? 0 : 250);
+
+}
 
 const scrollSection = async (scrollId: string) => {
 
@@ -177,11 +221,16 @@ watch(inViewSection, () => {
 	position: sticky;
 	top: 10px;
 	display: flex;
-	z-index: 100;
+	z-index: 10000 !important;
 	justify-content: center;
-	width: 100%;
-	pointer-events: none;
+	/* pointer-events: none; */
 	transition: all 0.2s ease-in-out;
+}
+
+
+.toolbar-selection {
+	position: relative;
+	pointer-events: all;
 }
 
 .mobile-menu-bar {
@@ -190,6 +239,7 @@ watch(inViewSection, () => {
 	left: 0;
 	width: 100%;
 	height: 60px;
+	z-index: 10000 !important;
 	background-color: #f0f0f0cc;
 	backdrop-filter: blur(24px);
 	-webkit-backdrop-filter: blur(24px);
@@ -223,7 +273,7 @@ watch(inViewSection, () => {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 75px;
+	gap: 50px;
 
 }
 
@@ -246,9 +296,8 @@ watch(inViewSection, () => {
 
 .hide-navigation {
 	opacity: 0;
-
-	overflow: hidden !important;
-
+	z-index: -1;
+	pointer-events: none;
 	transition: opacity 300ms ease-in-out !important;
 }
 
@@ -308,6 +357,7 @@ watch(inViewSection, () => {
 	position: relative;
 	pointer-events: all !important;
 	background-color: #e0e0e0aa;
+	z-index: 20;
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
 	z-index: 100;
@@ -383,7 +433,39 @@ watch(inViewSection, () => {
 	transition: all 150ms ease-in-out;
 }
 
-.equalizer-visual:hover {
-	background-color: #ffffff55;
+@media (hover: hover) and (pointer: fine) {
+
+	.equalizer-visual:hover {
+		background-color: #ffffff55;
+	}
+
+
+}
+
+.music-player-menu {
+	opacity: 1;
+	position: absolute;
+	top: 70px;
+	right: 0px;
+	width: 350px;
+	height: 152px;
+	z-index: 1000;
+	overflow: hidden;
+	box-shadow: 0px 0px 30px 0px #00000030;
+
+	border-radius: 12px;
+	/* transition-delay: 50ms; */
+	transition: all 250ms ease-in-out;
+}
+
+
+.hide-menu {
+	opacity: 0;
+	pointer-events: none;
+}
+
+
+.mobile-music-player {
+	height: 152px;
 }
 </style>

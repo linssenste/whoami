@@ -1,12 +1,17 @@
 <template>
 	<div class="music-player" :id="playerId">
+
 		<iframe ref="spotifyIframe" sandbox="allow-scripts" :src="iframeSrc" allow="fullscreen; autoplay"
 				allowfullscreen title="music player" frameborder="0" tabindex="-1"></iframe>
 	</div>
+
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { useStore } from '@/store'
+
+const store = useStore()
 
 const hasError = ref(false);
 
@@ -27,12 +32,10 @@ interface SpotifyController {
 }
 
 const props = defineProps<{
-	trackId: string | null,
 	playerId: string
 }>();
 props.playerId;
 
-const emit = defineEmits(['playing', 'next']);
 
 const embedController = ref<SpotifyController | null>(null);
 const iframeSrc = ref('');
@@ -40,19 +43,21 @@ const iframeSrc = ref('');
 let errorTimeout: ReturnType<typeof setTimeout> | null = null;
 let isPlaying = false;
 
-watch(() => props.trackId, async () => {
-	if (props.trackId == null) return;
-	iframeSrc.value = `https://open.spotify.com/embed/track/${props.trackId}`;
+watch(() => store.trackId, async () => {
+	if (store.trackId == null) return;
+	iframeSrc.value = `https://open.spotify.com/embed/track/${store.trackId}`;
 	if (!embedController.value) {
 		initSpotifyApi();
-	} else if (props.trackId != null && embedController.value) {
-		await embedController.value.loadUri('spotify:track:' + props.trackId);
+	} else if (store.trackId != null && embedController.value) {
+		await embedController.value.loadUri('spotify:track:' + store.trackId);
+
+		console.log("CLI", embedController.value)
 		if (isPlaying) embedController.value?.togglePlay();
 	}
 }, { immediate: true });
 
 function initSpotifyApi() {
-	if (!props.trackId) return;
+	if (!store.trackId) return;
 	hasError.value = false;
 
 	errorTimeout = setTimeout(() => {
@@ -75,7 +80,8 @@ function initSpotifyApi() {
 			}
 
 			const options = {
-				uri: 'spotify:track:' + props.trackId
+				height: '152',
+				uri: 'spotify:track:' + store.trackId
 			};
 
 			const callback = (controller: SpotifyController) => {
@@ -84,13 +90,15 @@ function initSpotifyApi() {
 
 				controller.addListener('playback_update', e => {
 					isPlaying = !e.data.isPaused;
-					emit("playing", !e.data.isPaused && !(e.data.position > 0 && e.data.position >= e.data.duration));
+					store.setPlayStatus(!e.data.isPaused && !(e.data.position > 0 && e.data.position >= e.data.duration))
 
 
 					if ((e.data.position > 0 && e.data.position >= e.data.duration) && !finishing) {
+
 						finishing = true;
-						emit('next')
 						setTimeout(() => {
+
+							store.shuffleTracks();
 							finishing = false;
 						}, 10);
 

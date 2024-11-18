@@ -1,38 +1,41 @@
 <template>
-	<LayoutStepScroller :steps="8" text-side="right" id="music">
+	<LayoutStepScroller :steps="7" text-side="right" id="music">
 
 		<template v-slot:music-step-1>
 
 			<div id="music-player" class="music-player">
 				<div class="hint-text">Select an album to play a song</div>
-				<ClientOnly>
-					<MusicSpotifyPlayer v-if="selectedTrack != null" v-on:playing="playingMusicEvent"
-										v-on:next="shuffleTracks()" playerId="music-player-1"
-										:trackId="selectedTrack" />
-				</ClientOnly>
-				<button v-on:click="shuffleTracks()" class="shuffle-button">
+
+
+				{{ store.selectedAlbum }}
+				<button v-on:click="store.shuffleTracks()" class="shuffle-button">
 					<img data-not-lazy width="18" height="18" src="../../assets/icons/shuffle.svg" alt="shuffle icon" />
 					SHUFFLE</button>
 
 			</div>
-
+			{{ store.trackId }}
 		</template>
 
 
 		<!-- step 2: overview of the analysis data -->
 		<template v-slot:music-step-2>
+
+			<MobileDescriptionText v-if="isMobile" />
+
 			<AnalysisDataOverview class="step-element" :updated="analysisData.update_time"
 								  :stats="analysisData.stats" />
 		</template>
 
 		<!-- step 3: chart analysis of the decades the songs where published -->
 		<template v-slot:music-step-3="{ visible }">
+			<h2 v-if="isMobile">DECADES GRAPH</h2>
 			<AnalysisDecadesChart :decades="analysisData.decades" :visible="visible" />
 		</template>
 
 		<!-- step 4: top 5 artists by (track) occurence  -->
 		<template v-slot:music-step-4="{ visible }">
-			<AnalysisFavoriteArtists v-on:play="shuffleTracks" :artists="analysisData.artists" :visible="visible" />
+			<AnalysisFavoriteArtists v-on:play="store.shuffleTracks" :artists="analysisData.artists"
+									 :visible="visible" />
 		</template>
 
 		<!-- step 5: analysized genre (divided in detailed (as chips) and generalized (radar-chart)) -->
@@ -45,17 +48,15 @@
 			<AnalysisMoodChart :data="analysisData.features" :visible="visible" />
 		</template>
 
-		<!-- step 7: cloned jupyter cell with link to notebook on github -->
+		<!-- step 7: cloned jupyter cell with link to notebook on github
 		<template v-slot:music-step-7="{ visible }">
 			<PolaroidSnapSlider :polaroids="polaroids" />
-		</template>
+		</template> -->
 		<!-- step 8: cloned jupyter cell with link to notebook on github -->
-		<template v-slot:music-step-8="{ visible }">
-			<AnalysisJupyterCell style="margin: 10px;" :visible="visible" />
+		<template v-slot:music-step-7="{ visible }">
+
+			<AnalysisJupyterCell v-if="!isMobile" style="margin: 10px;" :visible="visible" />
 		</template>
-
-
-
 
 
 		<template v-slot:text="{ focus }">
@@ -66,15 +67,14 @@
 </template>
 
 <script setup lang="ts">
+import { useStore } from '@/store'
+
+const store = useStore()
 import analysisData from '../../assets/analysis/export-spotify-analysis.json'
-import covers from '../../assets/analysis/export-spotify-covers.json'
+import MobileDescriptionText from './MobileDescriptionText.vue';
 
+const { isMobile } = useDeviceDetection();
 
-const polaroids = [
-	{ src: '/polaroids/music/polaroid-1.webp', alt: '' },
-	{ src: '/polaroids/music/polaroid-2.webp', alt: '' },
-	{ src: '/polaroids/music/polaroid-3.webp', alt: '' }
-]
 export interface ArtistStatsElement {
 	img: string;
 	tracks: number;
@@ -109,42 +109,6 @@ export interface DecadesStats {
 	[decade: string]: number;
 }
 
-
-const emit = defineEmits(['playing', 'selected']);
-
-const props = defineProps<{
-	selectedTrack: string | null
-}>();
-
-props.selectedTrack;
-
-function playingMusicEvent(isPlaying: boolean) {
-	emit('playing', isPlaying)
-}
-
-
-onMounted(() => {
-	shuffleTracks();
-})
-
-
-// randomly shuffle track or just by an artist
-function shuffleTracks(artistId: string | null = null) {
-	let albums = covers;
-
-	if (artistId != null) albums = covers.filter(cover => cover.artists[0].id == artistId);
-
-	if (!albums) albums = covers;
-
-	const randomAlbum = albums[Math.floor(Math.random() * albums.length)];
-	const randomTrack = randomAlbum.tracks[Math.floor(Math.random() * randomAlbum.tracks.length)]
-
-	emit('selected', randomTrack);
-}
-
-function playTrackEvent(trackId: string) {
-	emit('selected', trackId)
-}
 
 </script>
 
@@ -181,10 +145,13 @@ function playTrackEvent(trackId: string) {
 	height: 18px
 }
 
-.shuffle-button:hover {
-	opacity: 1;
-}
+@media (hover: hover) and (pointer: fine) {
 
+	.shuffle-button:hover {
+		opacity: 1;
+	}
+
+}
 
 .music-player {
 	min-height: 355px;
