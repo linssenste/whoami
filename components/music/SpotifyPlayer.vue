@@ -2,7 +2,7 @@
 	<div class="music-player" :id="playerId">
 
 		<iframe ref="spotifyIframe" sandbox="allow-scripts" :src="iframeSrc" allow="fullscreen; autoplay"
-				allowfullscreen title="music player" frameborder="0" tabindex="-1"></iframe>
+				allowfullscreen title="music player" height="152" frameborder="0" tabindex="-1"></iframe>
 	</div>
 
 </template>
@@ -11,9 +11,10 @@
 import { ref, watch } from 'vue';
 import { useStore } from '@/store'
 
-const store = useStore()
-
-const hasError = ref(false);
+const props = defineProps<{
+	playerId: string
+}>();
+props.playerId;
 
 // Interface for the Spotify IFrame API controller
 interface SpotifyIFrameAPI {
@@ -24,6 +25,7 @@ interface SpotifyIFrameAPI {
 	) => void;
 }
 
+
 // Interface for the controller that the Spotify API returns
 interface SpotifyController {
 	addListener: (event: string, callback: (e: any) => void) => void;
@@ -31,18 +33,19 @@ interface SpotifyController {
 	loadUri: (id: string) => void;
 }
 
-const props = defineProps<{
-	playerId: string
-}>();
-props.playerId;
 
+
+const store = useStore()
+
+const hasError = ref(false);
 
 const embedController = ref<SpotifyController | null>(null);
 const iframeSrc = ref('');
 
 let errorTimeout: ReturnType<typeof setTimeout> | null = null;
-let isPlaying = false;
 
+
+// Watch for track update/skip (changes in the trackId) and update the iframe source
 watch(() => store.trackId, async () => {
 	if (store.trackId == null) return;
 	iframeSrc.value = `https://open.spotify.com/embed/track/${store.trackId}`;
@@ -50,16 +53,18 @@ watch(() => store.trackId, async () => {
 		initSpotifyApi();
 	} else if (store.trackId != null && embedController.value) {
 		await embedController.value.loadUri('spotify:track:' + store.trackId);
-
-		console.log("CLI", embedController.value)
-		if (isPlaying) embedController.value?.togglePlay();
+		embedController.value?.togglePlay();
 	}
 }, { immediate: true });
 
+
+// Initialize the Spotify iframe API
 function initSpotifyApi() {
+
 	if (!store.trackId) return;
 	hasError.value = false;
 
+	// set a timeout to handle errors
 	errorTimeout = setTimeout(() => {
 		if (embedController.value) return;
 		console.error("Timeout occurred while setting up Spotify API");
@@ -67,7 +72,6 @@ function initSpotifyApi() {
 	}, 2000);
 
 	try {
-
 		let finishing = false;
 		(window as any).onSpotifyIframeApiReady = (IFrameAPI: SpotifyIFrameAPI) => {
 			if (errorTimeout) clearTimeout(errorTimeout);
@@ -80,16 +84,19 @@ function initSpotifyApi() {
 			}
 
 			const options = {
-				height: '152',
+				height: 152,
 				uri: 'spotify:track:' + store.trackId
 			};
+
 
 			const callback = (controller: SpotifyController) => {
 				embedController.value = controller;
 				hasError.value = false;
 
+				// listener for the playback update event
 				controller.addListener('playback_update', e => {
-					isPlaying = !e.data.isPaused;
+					store.isPlaying = !e.data.isPaused;
+
 					store.setPlayStatus(!e.data.isPaused && !(e.data.position > 0 && e.data.position >= e.data.duration))
 
 
@@ -113,6 +120,7 @@ function initSpotifyApi() {
 	}
 }
 
+// manually toggle playing (Note: only possible if initial play is done manually)
 function togglePlaying() {
 	try {
 		embedController.value?.togglePlay();
@@ -126,7 +134,10 @@ defineExpose({ togglePlaying });
 
 <style scoped>
 .music-player {
+	background-color: var(--light-grey-color);
 	width: 100%;
+	border-radius: 12px;
+	overflow: hidden;
 	height: 100%;
 	position: relative;
 }

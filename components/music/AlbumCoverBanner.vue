@@ -1,27 +1,32 @@
 <template>
-	<div class="virtual-scroller" ref="coverAreaRef">
-		<DynamicScroller :items="randomAlbumCovers" :min-item-size="200" direction="horizontal" class="cover-scroller"
-						 id="cover-banner-container">
-			<template #default="{ item, index, active }">
-				<DynamicScrollerItem :item="item" :active="active" :data-index="index" :data-active="active"
-									 class="cover-item" @click="selectCover(item)">
-					<MusicAlbumCover :src="item" :key="index"
-									 :status="{ playing: store.isPlaying, selected: store.selectedAlbum?.id == item.id }" />
-				</DynamicScrollerItem>
-			</template>
-		</DynamicScroller>
+	<div>
+		<div class="virtual-scroller" ref="coverAreaRef">
+			<DynamicScroller :items="randomAlbumCovers" :min-item-size="200" direction="horizontal"
+							 class="cover-scroller" id="cover-banner-container">
+				<template #default="{ item, index, active }">
+					<DynamicScrollerItem :item="item" :active="active" :data-index="index" :data-active="active"
+										 class="cover-item" @click="selectCover(item)">
+						<MusicAlbumCover :src="item" :key="index"
+										 :status="{ playing: store.isPlaying, selected: store.selectedAlbum?.id == item.id }" />
+					</DynamicScrollerItem>
+				</template>
+			</DynamicScroller>
 
-		<!-- Scroll arrows -->
-		<div v-if="!isTouchDevice" @mouseenter="startManualScroll(false)" @mouseleave="finishManualScroll"
-			 class="hover-scroll-pad left">
-			<span class="icon"></span>
+			<!-- Scroll arrows -->
+			<div v-if="!isTouchDevice" @mouseenter="startManualScroll(false)" @mouseleave="finishManualScroll"
+				 class="hover-scroll-pad left">
+				<span class="icon"></span>
+			</div>
+
+			<div v-if="!isTouchDevice" @mouseenter="startManualScroll(true)" @mouseleave="finishManualScroll"
+				 class="hover-scroll-pad right">
+				<span class="icon"></span>
+			</div>
+
 		</div>
 
-		<div v-if="!isTouchDevice" @mouseenter="startManualScroll(true)" @mouseleave="finishManualScroll"
-			 class="hover-scroll-pad right">
-			<span class="icon"></span>
-		</div>
 
+		<div class="hint-text">Select an album to play a song</div>
 	</div>
 </template>
 
@@ -112,6 +117,10 @@ const startAutoScroll = () => {
 
 <style scoped>
 .virtual-scroller {
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+
 	position: relative;
 	overflow: hidden;
 	width: 100%;

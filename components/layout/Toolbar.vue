@@ -104,14 +104,25 @@ const { isMobile } = useDeviceDetection();
 
 const store = useStore();
 
+let hasManuallyPlayed = false;
 
+watch(() => store.isPlaying, (isPlaying) => {
+	if (isPlaying) {
+		hasManuallyPlayed = true;
+	}
+});
 watch(() => store.trackId, (newTrackId, prevTrackId) => {
 
-	if (prevTrackId.length > 0 && store.trackId != null && store.trackId.length > 0) {
-		showMusicPlayer(true);
-		setTimeout(() => {
-			showMusicPlayer(false);
-		}, 1000);
+	if (prevTrackId.length > 0 && newTrackId != null && newTrackId.length > 0) {
+		if (!isMobile) {
+			showMusicPlayer(true);
+			setTimeout(() => {
+				showMusicPlayer(false);
+			}, 1000);
+		} else if (!hasManuallyPlayed) {
+			expandMobileMenu.value = true; // open mobile menu if autoplay is not possible (inital play)
+		}
+
 	}
 });
 
@@ -221,16 +232,16 @@ watch(inViewSection, () => {
 	position: sticky;
 	top: 10px;
 	display: flex;
-	z-index: 10000 !important;
+	z-index: 1000000 !important;
 	justify-content: center;
-	/* pointer-events: none; */
-	transition: all 0.2s ease-in-out;
 }
 
 
 .toolbar-selection {
 	position: relative;
-	pointer-events: all;
+
+
+	z-index: 1000000 !important;
 }
 
 .mobile-menu-bar {
@@ -243,7 +254,7 @@ watch(inViewSection, () => {
 	background-color: #f0f0f0cc;
 	backdrop-filter: blur(24px);
 	-webkit-backdrop-filter: blur(24px);
-	transition: all 300ms ease-in-out;
+	transition: all 250ms ease-in-out;
 }
 
 @media screen and (max-width: 1000px) {
@@ -275,7 +286,11 @@ watch(inViewSection, () => {
 	justify-content: center;
 	gap: 50px;
 
+	opacity: 1;
+	transition: opacity 700ms ease-in-out;
+
 }
+
 
 .mobile-nav-buttons {
 	position: relative;
@@ -284,7 +299,6 @@ watch(inViewSection, () => {
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
-	transition: opacity 700ms ease-in-out;
 }
 
 .mobile-navigation .nav-element {
@@ -447,7 +461,7 @@ watch(inViewSection, () => {
 	position: absolute;
 	top: 70px;
 	right: 0px;
-	width: 350px;
+	/* width: 350px; */
 	height: 152px;
 	z-index: 1000;
 	overflow: hidden;
