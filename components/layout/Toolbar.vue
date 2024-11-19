@@ -29,8 +29,7 @@
 			<div class="music-player-menu" v-on:mousemove="showMusicPlayer(true)"
 				 v-on:mouseleave="showMusicPlayer(false)" :class="{ 'hide-menu': !showMenu }">
 				<ClientOnly>
-					<MusicSpotifyPlayer v-if="store.trackId != null && store.trackId.length > 0"
-										playerId="music-player-1" />
+					<MusicSpotifyPlayer v-if="store.trackId != null && store.trackId.length > 0" />
 				</ClientOnly>
 			</div>
 		</div>
@@ -64,8 +63,7 @@
 
 			<div class="mobile-music-player">
 				<ClientOnly>
-					<MusicSpotifyPlayer v-if="store.trackId != null && store.trackId.length > 0"
-										playerId="music-player-2" />
+					<MusicSpotifyPlayer v-show="store.trackId != null && store.trackId.length > 0 && isMobile" />
 				</ClientOnly>
 			</div>
 		</div>
@@ -112,9 +110,8 @@ watch(() => store.isPlaying, (isPlaying) => {
 	}
 });
 watch(() => store.trackId, (newTrackId, prevTrackId) => {
-
-	if (prevTrackId.length > 0 && newTrackId != null && newTrackId.length > 0) {
-		if (!isMobile) {
+	if (prevTrackId.length > 0 && newTrackId.length > 0) {
+		if (!isMobile.value) {
 			showMusicPlayer(true);
 			setTimeout(() => {
 				showMusicPlayer(false);
