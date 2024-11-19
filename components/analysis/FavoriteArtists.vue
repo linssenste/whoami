@@ -9,9 +9,12 @@
 			<div class="artist-profile-picture">
 				<img draggable="false" height="90" width="90" alt=""
 					 :src="`https://i.scdn.co/image/ab6761610000f178${artist.img}`" v-lazy-load />
-				<div class="play-song-overlay" v-on:click="playFavorite(artist)">
-					<img data-not-lazy src="../../assets/icons/play.svg" alt="Play song of that favortie artists"
-						 width="30" height="30" />
+				<div class="play-song-overlay" :class="{ 'playing': playingArtist == artist.id }"
+					 v-on:click="playFavorite(artist)">
+					<img v-if="playingArtist != artist.id" data-not-lazy src="../../assets/icons/play.svg"
+						 alt="Play song of that favortie artists" width="30" height="30" />
+
+					<AudioVisualizer v-else class="visualizer" :playing="store.isPlaying" />
 				</div>
 			</div>
 
@@ -24,14 +27,17 @@
 			</div>
 
 		</div>
+
 	</div>
 </template>
 
 
 <script lang="ts" setup>
+import AudioVisualizer from '../music/AudioVisualizer.vue';
 import type { ArtistStatsElement } from './PlaylistAnalysis.vue';
 
-
+import { useStore } from '@/store'
+const store = useStore()
 
 
 const emit = defineEmits(['play'])
@@ -53,9 +59,13 @@ const sortedArtists = computed(() => {
 });
 
 
+const playingArtist = computed(() => {
+	return store.selectedAlbum?.artists[0].id ?? ''
+})
+
 function playFavorite(artist: ArtistElement) {
 
-	emit('play', artist.id);
+	store.shuffleTracks(artist.id);
 	const musicPlayerElement = document.getElementById('music-player');
 	if (!musicPlayerElement) return;
 
@@ -103,6 +113,13 @@ function playFavorite(artist: ArtistElement) {
 	transition: all 150ms ease-in-out;
 }
 
+.playing {
+	cursor: pointer;
+	background-color: #ffffff77;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+}
+
 .play-song-overlay img {
 	opacity: 0;
 	transition: all 200ms ease-in-out;
@@ -114,18 +131,31 @@ function playFavorite(artist: ArtistElement) {
 	height: 25px;
 }
 
-.artist-profile-picture:hover .play-song-overlay {
-	cursor: pointer;
-	background-color: #ffffff77;
-	backdrop-filter: blur(5px);
-	-webkit-backdrop-filter: blur(5px);
+.visualizer {
+	transition: all 200ms ease-in-out;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 
 }
 
-.artist-profile-picture:hover .play-song-overlay img {
-	opacity: .75;
-	width: 35px;
-	height: 35px;
+@media (hover: hover) and (pointer: fine) {
+
+	.artist-profile-picture:hover .play-song-overlay {
+		cursor: pointer;
+		background-color: #ffffff77;
+		backdrop-filter: blur(5px);
+		-webkit-backdrop-filter: blur(5px);
+
+	}
+
+	.artist-profile-picture:hover .play-song-overlay img {
+		opacity: .75;
+		width: 35px;
+		height: 35px;
+	}
+
 }
 
 .favs-container {
@@ -146,7 +176,7 @@ function playFavorite(artist: ArtistElement) {
 
 @media screen and (max-width: 400px) {
 	.artist-name {
-		width: 100px;
+		width: 150px;
 		overflow: hidden;
 		display: inline-block;
 		text-overflow: ellipsis;

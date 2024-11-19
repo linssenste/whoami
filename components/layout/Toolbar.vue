@@ -115,7 +115,7 @@ watch(() => store.trackId, (newTrackId, prevTrackId) => {
 			showMusicPlayer(true);
 			setTimeout(() => {
 				showMusicPlayer(false);
-			}, 1000);
+			}, hasManuallyPlayed ? 1000 : 2500);
 		} else if (!hasManuallyPlayed) {
 			expandMobileMenu.value = true; // open mobile menu if autoplay is not possible (inital play)
 		}
