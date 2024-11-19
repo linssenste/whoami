@@ -1,5 +1,5 @@
 <template>
-	<div class="music-player" :id="playerId">
+	<div class="music-player" id="spotify-embed-player">
 
 		<iframe ref="spotifyIframe" sandbox="allow-scripts" :src="iframeSrc" allow="fullscreen; autoplay"
 				allowfullscreen title="music player" height="152" frameborder="0" tabindex="-1"></iframe>
@@ -11,10 +11,6 @@
 import { ref, watch } from 'vue';
 import { useStore } from '@/store'
 
-const props = defineProps<{
-	playerId: string
-}>();
-props.playerId;
 
 // Interface for the Spotify IFrame API controller
 interface SpotifyIFrameAPI {
@@ -76,7 +72,7 @@ function initSpotifyApi() {
 		(window as any).onSpotifyIframeApiReady = (IFrameAPI: SpotifyIFrameAPI) => {
 			if (errorTimeout) clearTimeout(errorTimeout);
 
-			const element = document.getElementById(props.playerId)?.querySelector('iframe');
+			const element = document.getElementById("spotify-embed-player")?.querySelector('iframe');
 
 			if (!element) {
 				hasError.value = true;
