@@ -13,8 +13,11 @@ useParrallexScroll('risographic-image', 0.085);
 
 <style scoped>
 .art-image-container {
-
-	padding-top: 50px;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	position: relative;
+	/* padding-top: 50px; */
 	z-index: 0;
 	display: flex;
 	background-color: transparent;

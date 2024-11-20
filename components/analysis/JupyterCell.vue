@@ -15,6 +15,8 @@
 
 					<!-- pseudo python code -->
 					<div class="code-area">
+						<div class="green"># something nerdy: </div>
+
 						<div class="green"># swim playlist analysis with Spotify API</div>
 						<div>analysis_id = analyze(<span class="red">"spotify:playlist:2u6YwYORaQRWptbXc1VsZB"</span>)
 						</div>

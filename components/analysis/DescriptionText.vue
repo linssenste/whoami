@@ -3,13 +3,13 @@
 
 		<LayoutKeepScrollingAnimation class="scrolling-hint" :is-click="false" text="KEEP SCROLLING" />
 
-		<h1>Get to know me through music!</h1>
+		<h1 v-if="!isMobile">Get to know me through music</h1>
 
 		<!-- introduction to analysis -->
-		<p>
-			Music is an amazing thing! It shapes our lives, reflecting our moods, personalities, and memories. I've
-			chosen to introduce myself through the lens of my musical tastes, quantified objectively here. My analysis
-			is based on my swimming playlist.
+		<p v-if="!isMobile">
+			Music is an amazing thing! It shapes our lives, reflects our moods, our personalities and our memories. I
+			came up with the idea of sharing a glimpse into my musical tastes. My brief analysis is based on my swimming
+			playlist.
 		</p>
 
 		<!-- decades chart + link to resarch paper on music taste -->
@@ -62,6 +62,7 @@ import { audioFeatures } from '~/utils/audioFeatures';
 import type { AnalysisData } from './PlaylistAnalysis.vue';
 import { computed } from 'vue';
 
+const { isMobile } = useDeviceDetection();
 const props = defineProps<{
 	data: AnalysisData;
 	step: number;
@@ -98,6 +99,10 @@ const featureLabel = (labelId: string, inverted: boolean = false) => {
 </script>
 
 <style scoped>
+h1 {
+	/* color: var(--orange-color); */
+}
+
 #analysis-description {
 	position: relative;
 }
@@ -120,10 +125,15 @@ p {
 	}
 
 	h1 {
-		padding-top: 50px;
+		/* padding-top: 50px; */
 		text-align: center;
 		line-height: 40px;
 	}
+
+	#analysis-description {
+		padding-bottom: 50px;
+	}
+
 
 }
 </style>

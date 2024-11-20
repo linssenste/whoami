@@ -1,5 +1,7 @@
 <template>
 	<div class="genre-container">
+
+
 		<div class="chart-container">
 			<!-- radar chart of generalized genres -->
 			<ClientOnly>
@@ -8,8 +10,8 @@
 		</div>
 
 		<!-- detailed genre chips -->
-		<h3 class="detail-text">More detailed genres:</h3>
-		<div class="detailed-genre-chips">
+		<h3 v-if="!isMobile" class="detail-text">More detailed genres:</h3>
+		<div v-if="!isMobile" class="detailed-genre-chips">
 			<span v-for="other in Object.keys(data.detailed)" :key="other">
 				{{ other }}
 			</span>
@@ -20,7 +22,7 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
 import type { GenreStats } from './PlaylistAnalysis.vue';
-
+const { isMobile } = useDeviceDetection();
 // Define types for chartOptions and series
 type ChartOptions = {
 	markers: { size: number },

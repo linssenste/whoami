@@ -7,8 +7,9 @@
 				<div id="welcome-introduction">
 
 					<!-- greetings (with name if query is defined)  -->
-					<h1>Hello<span v-if="welcomeName" id="name" class="welcome-name">{{ welcomeName }}</span>!
-					</h1>
+					<span class="handwriting">Hello<span v-if="welcomeName" id="name" class="welcome-name">{{
+						welcomeName }}</span>!
+					</span>
 					<p>
 						My name is Steffen, and I am a front-end developer with a passion for sleek UI & UX. My work is
 						driven by a deep interest for both technology and design, complemented by my enthusiasm for
@@ -89,5 +90,13 @@ onBeforeMount(() => {
 .gallery-button {
 	margin-top: 10px;
 	margin-bottom: 10px
+}
+
+
+.handwriting {
+	color: var(--pen-color);
+	font-family: 'biro_script_standardregular' !important;
+	font-size: 40px;
+	line-height: 60px;
 }
 </style>

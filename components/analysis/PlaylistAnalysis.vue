@@ -18,17 +18,18 @@
 
 		<!-- step 3: top 5 artists by (track) occurence  -->
 		<template v-slot:music-step-3="{ visible }">
-			<AnalysisFavoriteArtists v-on:play="store.shuffleTracks" :artists="analysisData.artists"
-									 :visible="visible" />
+			<AnalysisFavoriteArtists :artists="analysisData.artists" :visible="visible" />
 		</template>
 
 		<!-- step 4: analysized genre (divided in detailed (as chips) and generalized (radar-chart)) -->
 		<template v-slot:music-step-4="{ visible }">
+			<h2 v-if="isMobile">GENRE</h2>
 			<AnalysisGenreChart :data="analysisData.genres" />
 		</template>
 
 		<!-- step 5: audio features as 0 to 1 sliders-->
 		<template v-slot:music-step-5="{ visible }">
+			<h2 v-if="isMobile" style="margin-bottom: 50px;">MUSIC MOOD</h2>
 			<AnalysisMoodChart :data="analysisData.features" :visible="visible" />
 		</template>
 
@@ -48,12 +49,10 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '@/store'
 import analysisData from '../../assets/analysis/export-spotify-analysis.json'
 import MobileDescriptionText from './MobileDescriptionText.vue';
 
 const { isMobile } = useDeviceDetection();
-const store = useStore()
 
 export interface ArtistStatsElement {
 	img: string;

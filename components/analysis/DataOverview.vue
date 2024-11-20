@@ -8,6 +8,9 @@
 			</div>
 		</div>
 
+		<button v-on:click="store.shuffleTracks()" class="shuffle-button">
+			<img data-not-lazy width="18" height="18" src="../../assets/icons/shuffle.svg" alt="shuffle icon" />
+			SHUFFLE</button>
 		<!-- last update time -->
 		<div class="last-update-time">{{ updateTime }}</div>
 
@@ -25,6 +28,10 @@
 
 <script lang="ts" setup>
 import type { DataStats } from './PlaylistAnalysis.vue';
+
+import { useStore } from '@/store'
+
+const store = useStore()
 
 const props = defineProps<{
 	stats: DataStats;
@@ -100,6 +107,12 @@ const displayedStats = computed(() => ({
 	.number-row {
 		grid-template-columns: repeat(2, 1fr);
 	}
+
+}
+
+.shuffle-button {
+
+	width: 100%;
 
 }
 </style>
