@@ -21,6 +21,10 @@ export const useStore = defineStore('music-player-store', {
 		this.isPlaying = playing
 	},
 
+	selectTrack(trackId: string){
+		this.trackId = trackId
+	},
+
 	// change track to a random track from the selected album
      changeTrack(item: AlbumCover){
     this.selectedAlbum = item
