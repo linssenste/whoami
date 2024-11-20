@@ -19,7 +19,7 @@
 					<!-- <img src="../assets/icons/chevron-left.svg" alt="chevron left" title="Close polaroid stack"
 						 width="16" height="16" /> -->
 					<div class="chevron-icon">
-						<ChevronArrowIcon :size="10" />
+						<ChevronArrowIcon :size="9" />
 					</div>
 				</button>
 			</li>
@@ -252,6 +252,7 @@ ul.polaroids-list li.polaroid {
 	background-color: #e0e0e0;
 	border-radius: 10px;
 
+	padding: 0px !important;
 	position: relative;
 	outline: none;
 	border: none;
@@ -262,13 +263,17 @@ ul.polaroids-list li.polaroid {
 	transition: all 200ms ease-in-out;
 }
 
-.close-button:hover {
-	height: 400px;
-	opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+
+	.close-button:hover {
+		height: 400px;
+		opacity: 1;
+	}
+
 }
 
 .close-button .chevron-icon {
-	transform: rotate(-90deg) translateX(10px)
+	transform: rotate(-90deg)
 }
 
 .append-slot-hidden {

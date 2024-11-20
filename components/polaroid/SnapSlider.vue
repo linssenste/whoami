@@ -66,9 +66,6 @@ function nextPolaroidImage(direction: number) {
 
 let timeoutHandle: any = null
 function selectByIndex(imageIndex: number) {
-
-
-	console.log("selectByIndex, ", imageIndex)
 	if (imageIndex == selectedIndex.value) return;
 	if (timeoutHandle != null) clearTimeout(timeoutHandle)
 
@@ -266,8 +263,11 @@ function onScroll() {
 		mask-image: linear-gradient(90deg, transparent, black -80%, transparent);
 	}
 
-	.scroll-snap-button:hover::before {
-		backdrop-filter: blur(10px);
+	@media (hover: hover) and (pointer: fine) {
+
+		.scroll-snap-button:hover::before {
+			backdrop-filter: blur(10px);
+		}
 	}
 }
 

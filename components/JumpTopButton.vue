@@ -35,15 +35,16 @@ onUnmounted(() => {
 	z-index: 1000;
 	right: 25px;
 	bottom: 25px;
-	width: 60px;
-	height: 60px;
+	width: 60px !important;
+	height: 60px !important;
 	border: none;
-	border-radius: 50%;
+	border-radius: 50% !important;
 	background-color: #ffffffaa;
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 	box-shadow: 0px 0px 30px 0px #00000030;
 	cursor: pointer;
+	padding: 0 !important;
 	outline: none;
 	display: flex;
 	align-items: center;
@@ -61,8 +62,11 @@ onUnmounted(() => {
 	opacity: 0;
 }
 
-.jump-button:hover {
-	box-shadow: 0px 0px 30px 0px #00000050;
+@media (hover: hover) and (pointer: fine) {
+
+	.jump-button:hover {
+		box-shadow: 0px 0px 30px 0px #00000050;
+	}
 }
 
 

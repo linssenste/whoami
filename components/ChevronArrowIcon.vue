@@ -30,9 +30,16 @@ const size = props.size || 16;
 	transition: transform 250ms ease-in-out;
 }
 
+@media (hover: hover) and (pointer: fine) {
 
-button:hover .icon {
-	transform: translateY(-4px) rotate(45deg);
+
+	button:hover .icon {
+		transform: translateY(-4px) rotate(45deg);
+	}
+
+	button:hover .icon::after {
+		opacity: 1;
+	}
 }
 
 button .icon::after {
@@ -47,9 +54,5 @@ button .icon::after {
 	opacity: 0;
 	transition-delay: 50ms;
 	transition: opacity 250ms ease-in-out;
-}
-
-button:hover .icon::after {
-	opacity: 1;
 }
 </style>
