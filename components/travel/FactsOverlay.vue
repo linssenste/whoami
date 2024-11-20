@@ -1,64 +1,57 @@
 <template>
 	<div class="fact-overlay">
 
-
-		<div style="">
-
-			<h2>
-				<!-- <img width="100"
-					 src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/European_stars.svg/300px-European_stars.svg.png" /> -->
-
-				Train Traveling with my dog through Europe 2024
-			</h2>
-
-			<p>
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-				labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-				et
-				ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-			</p>
-		</div>
-
-		<div class="facts-row">
-
-			<div class="facts-col">
-				<div class="fact">
-					<div class="fact-value">12026 km</div>
-					<div class="fact-description">distance </div>
-				</div>
-
-				<div class="fact">
-					<div class="fact-value">186 h</div>
-					<div class="fact-description">on the Track</div>
-				</div>
+		<div class="facts-grid">
+			<div class="fact">
+				<div class="fact-value">12026 km</div>
+				<div class="fact-description">distance </div>
 			</div>
-			<div class="facts-col">
 
-				<div class="fact">
-					<div class="fact-value">20</div>
-					<div class="fact-description">States</div>
-				</div>
-
-				<div class="fact">
-					<div class="fact-value">31</div>
-					<div class="fact-description">Cities</div>
-				</div>
+			<div class="fact">
+				<div class="fact-value">186 h</div>
+				<div class="fact-description">on the Track</div>
 			</div>
 
 
-			<div class="facts-col">
-				<div class="fact">
-					<div class="fact-value">3</div>
-					<div class="fact-description">Gauge Types</div>
-				</div>
+			<div class="fact">
+				<div class="fact-value">20</div>
+				<div class="fact-description">States</div>
+			</div>
 
-				<div class="fact">
-					<div class="fact-value">2</div>
-					<div class="fact-description">Timezones</div>
-				</div>
+			<div class="fact">
+				<div class="fact-value">31</div>
+				<div class="fact-description">Cities</div>
+			</div>
+
+
+
+			<div class="fact">
+				<div class="fact-value">3</div>
+				<div class="fact-description">Gauge Types</div>
+			</div>
+
+			<div class="fact">
+				<div class="fact-value">2</div>
+				<div class="fact-description">Timezones</div>
 			</div>
 
 		</div>
+
+
+		<div>
+			<MusicPlaySong :song="sectionSong" />
+
+			<button v-on:click="startButtonEvent()" class="start-gallery-button">Show Travel map
+
+			</button>
+		</div>
+
+
+
+
+
+
+
 
 	</div>
 </template>
@@ -66,11 +59,25 @@
 
 <script setup lang="ts">
 
+const sectionSong = {
+	"cover": "9dd1a35ada9870dc879dfb9e",
+	"id": "5RaDlk1pjOFSfcGDurH62z",
+	"name": "Gold Rush Kid",
+	"artists": [{ "name": "George Ezra", "id": "2ysnwxxNtSgbb9t1m2Ur4j" }],
+	"release": "2022-06-10", "track": "4N5s8lPTsjI9EGP7K4SXzB"
+}
+
 const props = defineProps<{
 	visited: string[]
 }>()
 props.visited;
 
+const emit = defineEmits(['start']);
+
+function startButtonEvent() {
+
+	emit('start');
+}
 
 </script>
 
@@ -81,7 +88,9 @@ props.visited;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	gap: 20px;
+	padding: 20px;
+	padding-top: 0px !important;
+	gap: 30px;
 
 }
 
@@ -114,6 +123,7 @@ props.visited;
 
 .fact {
 	padding: 20px;
+	width: 150px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -142,11 +152,41 @@ props.visited;
 	align-items: center;
 }
 
-.facts-row {
-	display: flex;
-	flex-direction: row;
+.facts-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	width: 100%;
 	justify-content: center;
 	align-items: center;
-	gap: 20px;
+}
+
+@media (max-width: 600px) {
+	.facts-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+	.facts-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (min-width: 901px) {
+	.facts-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+.start-gallery-button {
+	background-color: white;
+	height: 45px;
+	/* font-size: 16px; */
+	width: 100%;
+}
+
+.arrow-icon {
+	transform: rotate(90deg);
+	margin-left: 10px;
 }
 </style>

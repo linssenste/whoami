@@ -1,5 +1,5 @@
 <template>
-	<LMap ref="map" :zoom="zoom" :min-zoom="zoom" :max-zoom="zoom" :center="[52.21322, 8.559482]"
+	<LMap v-lazy-load ref="map" :zoom="zoom" :min-zoom="zoom" :max-zoom="zoom" :center="[52.21322, 8.559482]"
 		  :use-global-leaflet="false">
 		<LTileLayer url="http://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png" attribution="" layer-type="base"
 					name="OpenStreetMap" />
