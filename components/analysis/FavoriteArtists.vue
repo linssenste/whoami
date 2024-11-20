@@ -66,12 +66,6 @@ const playingArtist = computed(() => {
 function playFavorite(artist: ArtistElement) {
 
 	store.shuffleTracks(artist.id);
-	const musicPlayerElement = document.getElementById('music-player');
-	if (!musicPlayerElement) return;
-
-	musicPlayerElement.scrollIntoView({
-		behavior: 'smooth'
-	});
 
 }
 </script>
