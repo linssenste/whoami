@@ -1,8 +1,8 @@
 <template>
 	<transition name="fade">
-		<button v-show="showButton" aria-label="Scroll to top button" @click="scrollToTop" class="jump-button">
+		<div v-show="showButton" aria-label="Scroll to top button" @click="scrollToTop" class="jump-button">
 			<ChevronArrowIcon :size="10" :rotation="90" color="#505050" />
-		</button>
+		</div>
 	</transition>
 </template>
 
@@ -39,9 +39,10 @@ onUnmounted(() => {
 	height: 60px !important;
 	border: none;
 	border-radius: 50% !important;
-	background-color: #ffffffaa;
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
+	background-color: #ffffff55 !important;
+	backdrop-filter: blur(10px) !important;
+	-webkit-backdrop-filter: blur(10px) !important;
+
 	box-shadow: 0px 0px 30px 0px #00000030;
 	cursor: pointer;
 	padding: 0 !important;
