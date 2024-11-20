@@ -4,12 +4,18 @@
 			<iframe width="100%" height="100%" style="border: none" src="https://instax.linssenste.dev" />
 		</div>
 
-		<!-- Place this tag where you want the button to render. -->
-		<github-button href="https://github.com/linssenste/instax-link-web"
-					   data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large"
-					   data-show-count="true"
-					   aria-label="Star linssenste/instax-link-web on GitHub">Star</github-button>
-		<h1>* this is a side project of mine</h1>
+		<div class="hint-area">
+
+			<span class="hint-text">* <a href="https://instax.linssenste.dev" target="_blank">This</a> is a side
+				project
+			</span>
+
+			<github-button href="https://github.com/linssenste/instax-link-web"
+						   data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large"
+						   data-show-count="true"
+						   aria-label="Star linssenste/instax-link-web on GitHub">Star</github-button>
+
+		</div>
 	</div>
 </template>
 
@@ -42,5 +48,27 @@ const { isMobile } = useDeviceDetection();
 	border-radius: 0px;
 	margin: 0px !important;
 	margin-top: 10px;
+}
+
+.hint-area {
+
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 40px;
+}
+
+.hint-area a {
+	color: var(--grey-color);
+}
+
+@media (max-width: 768px) {
+	.hint-area {
+		flex-direction: column;
+		align-items: center;
+	}
 }
 </style>
