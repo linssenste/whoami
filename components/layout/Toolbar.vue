@@ -231,6 +231,7 @@ watch(inViewSection, () => {
 .toolbar {
 	position: sticky;
 	top: 10px;
+	pointer-events: none;
 	display: flex;
 	z-index: 1000000 !important;
 	justify-content: center;
@@ -240,7 +241,7 @@ watch(inViewSection, () => {
 .toolbar-selection {
 	position: relative;
 
-
+	pointer-events: all;
 	z-index: 1000000 !important;
 }
 
