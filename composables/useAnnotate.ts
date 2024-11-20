@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted, watchEffect } from 'vue';
 
 type Annotation = ReturnType<typeof annotate>;
 
-export function useAnnotate(elementId: string, toggle?: () => boolean, lineType = 'underline', delay = 0, padding = [0, 3, 0, 3]) {
+export function useAnnotate(elementId: string, toggle?: () => boolean, lineType = 'underline', delay = 0, padding = [0, 3, 0, 3], color ='var(--pen-color)') {
   const observer = ref<IntersectionObserver | null>(null);
   const annotation = ref<Annotation | null>(null);
 
@@ -13,7 +13,7 @@ export function useAnnotate(elementId: string, toggle?: () => boolean, lineType 
 
     annotation.value = annotate(humanText, {
       type: lineType as any,
-      color: 'var(--pen-color)',
+      color: color,
       padding: padding,
 	  multiline: true
     });
