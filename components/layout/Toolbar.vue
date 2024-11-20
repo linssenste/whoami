@@ -26,10 +26,12 @@
 			</div>
 
 			<!-- music player hover menu - only appears on hover on equalizer -->
-			<div class="music-player-menu" v-on:mousemove="showMusicPlayer(true)"
-				 v-on:mouseleave="showMusicPlayer(false)" :class="{ 'hide-menu': !showMenu }">
+			<div class="music-player-menu" v-on:mouseenter="showMusicPlayer(true)"
+				 v-on:mousemove="showMusicPlayer(true)" v-on:mouseleave="showMusicPlayer(false)"
+				 :class="{ 'hide-menu': !showMenu }">
 				<ClientOnly>
-					<MusicSpotifyPlayer v-if="store.trackId != null && store.trackId.length > 0" />
+					<MusicSpotifyPlayer v-if="store.trackId != null && store.trackId.length > 0" playerId="music-player"
+										:mobile="false" />
 				</ClientOnly>
 			</div>
 		</div>
@@ -63,7 +65,8 @@
 
 			<div class="mobile-music-player">
 				<ClientOnly>
-					<MusicSpotifyPlayer v-show="store.trackId != null && store.trackId.length > 0 && isMobile" />
+					<MusicSpotifyPlayer v-show="store.trackId != null && store.trackId.length > 0 && isMobile"
+										:mobile="true" playerId="music-player-mobile" />
 				</ClientOnly>
 			</div>
 		</div>
@@ -478,5 +481,6 @@ watch(inViewSection, () => {
 
 .mobile-music-player {
 	height: 152px;
+	z-index: 10000 !important;
 }
 </style>

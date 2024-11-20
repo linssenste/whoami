@@ -2,7 +2,7 @@
 	<div class="music-section-container">
 		<Risographic class="art" :class="{ 'mobile-art-offset': isMobile }" />
 
-		<!-- album covers are offsetted into the riso-art -->
+		<!-- album covers are offsetted into the riso-art  -->
 		<MusicAlbumCoverBanner class="album-banner" />
 		<AnalysisPlaylistAnalysis />
 	</div>
@@ -21,7 +21,7 @@ const { isMobile } = useDeviceDetection();
 }
 
 .art {
-	margin-top: -50px;
+	margin-top: 0px;
 }
 
 .mobile-art-offset {
