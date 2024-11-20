@@ -1,7 +1,7 @@
 
 export const useParrallexScroll = (docId: string, speed: number, scrollDirection = true) => {
 	let initalRectOffset = 0;
-// 	initalRectOffset = window.scrollY + imageContainerRef.value.getBoundingClientRect().top;
+
 
 const handleScroll = () => {
 	const refDoc = document.getElementById(docId);
@@ -15,6 +15,10 @@ const handleScroll = () => {
 };
   
 	onMounted(() => {
+		const doc = document.getElementById(docId);
+	if (!doc) return;
+		initalRectOffset = window.scrollY + doc.getBoundingClientRect().top;
+		handleScroll();
 	  window.addEventListener('scroll', handleScroll);
 	});
   
