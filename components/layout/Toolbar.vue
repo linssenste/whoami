@@ -93,7 +93,7 @@ const sections = ref([
 	{ name: 'Playlist', id: 'analysis-section', offset: 580 },
 	{ name: 'Adventure', id: 'travel-section', offset: -75 },
 	{ name: 'Polaroids', id: 'polaroid-section', offset: -20 },
-	{ name: 'Fun Facts', id: 'facts-section', offset: 0 }
+	{ name: 'Inclusion', id: 'inclusion-section', offset: 0 }
 ]);
 
 

@@ -12,7 +12,18 @@
 		<PolaroidSection id="polaroid-section" />
 
 
-		<div id="facts-section" style="width: 100%; height: 900px; background-color: grey;"></div>
+		<InclusionSection id="inclusion-section" />
+
+		<!-- <Risographic style="margin-top: -550px;" id="riso-section" /> -->
+		<h2>Thats it!</h2>
+
+		<!-- <div id="facts-section" style="width: 100%; height: 900px; background-color: grey;">
+
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/S-S5_oVNvZQ?si=qin9graRTGLmWD7u"
+					title="YouTube video player" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+		</div> -->
 
 	</div>
 </template>
