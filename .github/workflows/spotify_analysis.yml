@@ -39,5 +39,5 @@ jobs:
           git config --global user.email '${{ github.actor }}@users.noreply.github.com'
           git add assets/analysis/export-spotify-covers.json assets/analysis/export-spotify-analysis.json  # Add the JSON file at the specified path
           git status  # Optional, for debugging to see what changes are being committed
-          git commit -m "Updated jupyter notebook and JSON output in assets/analysis" || echo "No changes to commit"
+          git commit -m "[update] Updated jupyter notebook + output" || echo "No changes to commit"
           git push
