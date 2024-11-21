@@ -7,14 +7,14 @@
 		<!-- track name + singer(s) -->
 		<!-- lighthouse contrast issue originates here ?? -->
 		<div class="song-info">
-			<div>{{ song.name }}</div>
-			<div>{{ song.artists.map(artist => artist.name).join(', ') }}</div>
+			<div>{{ song.trackName }}</div>
+			<div>{{ song.artist }}</div>
 		</div>
 
 
 		<!-- play/audio visualizer  -->
 		<div class="playing-area">
-			<button v-if="!(store.trackId == song.track)" v-on:click="playSectionSong()"
+			<button v-if="!(store.trackId == song.trackId)" v-on:click="playSectionSong()"
 					aria-label="button to play a dedicted song" title="play song"><img alt="play icon " data-not-lazy
 					 src="../../assets/icons/play.svg" width="30" height="30" /></button>
 			<MusicAudioVisualizer v-else v-on:click="togglePlayStatus(!store.isPlaying)" class="audio-equalizer"
@@ -45,7 +45,7 @@ function togglePlayStatus(play: boolean) {
 	store.setPlayStatus(play);
 }
 function playSectionSong() {
-	store.selectTrack(props.song.track);
+	store.selectTrack(props.song.trackId);
 
 }
 

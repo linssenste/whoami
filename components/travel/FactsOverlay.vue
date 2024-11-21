@@ -59,13 +59,7 @@
 
 <script setup lang="ts">
 
-const sectionSong = {
-	"cover": "9dd1a35ada9870dc879dfb9e",
-	"id": "5RaDlk1pjOFSfcGDurH62z",
-	"name": "Gold Rush Kid",
-	"artists": [{ "name": "George Ezra", "id": "2ysnwxxNtSgbb9t1m2Ur4j" }],
-	"release": "2022-06-10", "track": "4N5s8lPTsjI9EGP7K4SXzB"
-}
+const sectionSong = { "cover": "edcbd0d7ca71dacaf5729825", "id": "2Qw5lzIOaxKTmxRGVUw5Sc", "trackName": "Wie Zuhause", "artist": "Alligatoah", "trackId": "03EDhYj6tjYFb8aXOVC2VQ" }
 
 const props = defineProps<{
 	visited: string[]
