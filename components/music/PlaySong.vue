@@ -1,16 +1,19 @@
 <template>
 	<div class="song-section">
 
-		<!-- album cover image -->
-		<img :src="`https://i.scdn.co/image/ab67616d00004851${song.cover}`" alt="album cover" width="75" height="75" />
+		<div class="cover-title">
+			<!-- album cover image -->
+			<img :src="`https://i.scdn.co/image/ab67616d00004851${song.cover}`" alt="album cover" width="75"
+				 height="75" />
 
-		<!-- track name + singer(s) -->
-		<!-- lighthouse contrast issue originates here ?? -->
-		<div class="song-info">
-			<div>{{ song.trackName }}</div>
-			<div>{{ song.artist }}</div>
+			<!-- track name + singer(s) -->
+			<!-- lighthouse contrast issue originates here ?? -->
+			<div class="song-info">
+				<div>{{ song.trackName }}</div>
+				<div>{{ song.artist }}</div>
+			</div>
+
 		</div>
-
 
 		<!-- play/audio visualizer  -->
 		<div class="playing-area">
@@ -81,6 +84,11 @@ function playSectionSong() {
 	font-weight: bold;
 }
 
+.cover-title {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
 
 .playing-area {
 	width: 50px;

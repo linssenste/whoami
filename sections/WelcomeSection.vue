@@ -91,12 +91,4 @@ onBeforeMount(() => {
 	margin-top: 10px;
 	margin-bottom: 10px
 }
-
-
-.handwriting {
-	color: var(--pen-color);
-	font-family: 'biro_script_standardregular' !important;
-	font-size: 40px;
-	line-height: 60px;
-}
 </style>

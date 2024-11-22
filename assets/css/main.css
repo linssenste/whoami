@@ -37,6 +37,14 @@ html {
 	align-items: center;
 }
 
+.handwriting {
+	color: var(--pen-color);
+	font-family: 'biro_script_standardregular' !important;
+	font-size: 38px;
+	
+	line-height: 60px;
+}
+
 .hint-text {
 	text-align: center;
 	color: var(--grey-color);
