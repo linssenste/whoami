@@ -54,7 +54,7 @@ const store = useStore();
 onMounted(() => {
 	window.focus()
 
-	window.addEventListener("blur", () => {
+	document.addEventListener("blur", () => {
 		setTimeout(() => {
 			if (document.activeElement.tagName === "IFRAME") {
 				store.setPlayStatus(false);
