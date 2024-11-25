@@ -49,10 +49,6 @@
 			{{ featureLabel('acousticness', true) }} sounds.
 		</p>
 
-		<!-- end section -->
-		<p>
-			Now you know me <span id="text-7" style="padding-top: 10px">a little better?!</span>
-		</p>
 
 	</div>
 </template>

@@ -3,16 +3,11 @@
 		<div style="text-align: center;">
 
 			<h1>European Adventures</h1>
-			<p>I spent a few months this year travelling around Europe with my dog Jasper, exploring the continent by
+			<p>I spent a few months {{ yearText }} travelling around Europe with <span id="dog-name">my dog
+					Jasper</span>, exploring the continent
+				by
 				train.</p>
-			<!-- <p style=" text-align: justify;">
-				I set off across Europe with my dog and best friend, Jasper. By train and ferry, we explored
-				breathtaking
-				landscapes - from the sunny shores of Naples to the icy edge of the Arctic Circle. Along the Atlantic,
-				Baltic and Mediterranean coasts, we captured moments that showcase the unique charm of each country.
-				Explore
-				our journey with this interactive map and photo gallery, with Jasper in the spotlight.
-			</p> -->
+
 		</div>
 		<TravelMapGallery />
 	</div>
@@ -20,11 +15,13 @@
 
 <script lang="ts" setup>
 
+useAnnotate('dog-name', undefined, 'underline', 0);
+
+const yearText = computed(() => {
+
+	const currentYear = new Date().getFullYear();
+	if (currentYear == 2024) return 'this year';
+	if (currentYear - 1 == 2024) return 'last year';
+	else return 'in 2024'
+})
 </script>
-
-
-<style scoped>
-h1 {
-	/* color: var(--orange-color); */
-}
-</style>
