@@ -1,7 +1,7 @@
 <template>
 
 
-	<img :src="src" class="polaroid-image" ref="polaroidRef" width="335" height="401" :alt="alt" data-testid="image"
+	<img :src="src" class="polaroid-image" ref="polaroidRef" :width="335" :height="401" :alt="alt" data-testid="image"
 		 draggable="false" onerror="this.src='/polaroids/polaroid-error.webp'" />
 
 
@@ -44,8 +44,11 @@ onMounted(() => {
 	position: relative;
 	width: 335px !important;
 	min-width: 335px !important;
+	max-width: 335px !important;
+
 	margin: 10px;
 	height: 401px !important;
+	max-height: 401px !important;
 	min-height: 401px !important;
 }
 </style>

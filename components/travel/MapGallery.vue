@@ -7,7 +7,7 @@
 			<div class="countries-map" ref="mapRef" id="country-map">
 				<div class="countries-map map">
 					<div v-show="selectedCountry != null && selectedCountry.length == 2" class="hint-overlay">
-						<img width="63" :alt="`flag of ${selectedCountry}`" class="flag"
+						<img width="63" height="63" :alt="`flag of ${selectedCountry}`" class="flag"
 							 :src="`https://flagsapi.com/${selectedCountry}/flat/64.png`">
 						<span v-if="selectedCountry">{{ countriesNames[selectedCountry] }}</span>
 
@@ -59,7 +59,7 @@ const { isMobile } = useDeviceDetection();
 
 
 
-const visitedCountries = ["INTRO", "BE", "NL", "DE", "HU", "AT", "SI", "HR", "IT", "DK", "SE", "NO", "CZ", "PL", "LT", "LV", "EE", "FI"];
+const visitedCountries = ["INTRO", "BE", "NL", "DE", "HU", "SK", "AT", "SI", "HR", "IT", "DK", "SE", "NO", "CZ", "PL", "LT", "LV", "EE", "FI"];
 
 const countriesNames: { [key: string]: string } = {
 	"BE": "Belgium",
@@ -85,7 +85,7 @@ const travelImages = visitedCountries.map((countryId) => {
 
 	// Generate the image object with the path and id
 	return {
-		src: `/polaroids/travel/en-${countryId}.webp`,
+		src: `/polaroids/travel/${countryId}.webp`,
 		alt: '',
 		id: countryId
 	};
