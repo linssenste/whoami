@@ -1,5 +1,10 @@
 {
-	"name": "nuxt-app",
+	"name": "introduction-website",
+	"description": "A website to introduce myself and show my developing skills",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/linssenste/whoami.git"
+	},
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -7,9 +12,7 @@
 		"dev": "nuxt dev --host",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare",
-		"lhci:mobile": "lhci autorun",
-		"lhci:desktop": "lhci autorun --collect.settings.preset=desktop"
+		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
 		"@nuxtjs/leaflet": "^1.2.4",
