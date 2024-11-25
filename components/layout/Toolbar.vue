@@ -14,7 +14,7 @@
 				</button>
 
 				<!-- qualizier indicating if music is playing  -->
-				<div class="equalizer-visual" v-on:mousemove="showMusicPlayer(true)"
+				<div class="equalizer-visual" title="Click to shuffle songs" v-on:mousemove="showMusicPlayer(true)"
 					 v-on:mouseleave="showMusicPlayer(false)" :tabindex="0" @click="store.shuffleTracks()">
 					<MusicAudioVisualizer :playing="store.isPlaying" title="Music player" />
 				</div>

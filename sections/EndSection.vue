@@ -15,12 +15,13 @@
 
 					<!-- header section + moving thumb  -->
 					<div class="header">
-						<h1>That's it! 🎉</h1>
+						<h1>That's it! </h1>
 
 
 						<!-- draggable cursor to drag card -->
 						<div v-show="!isMobile" id="floating-card-header">
-							<img draggable="false" src="/assets/icons/move.svg" width="30" height="30" />
+							<img draggable="false" alt="move icon to indicate dragging" src="/assets/icons/move.svg"
+								 width="30" height="30" />
 						</div>
 					</div>
 
@@ -98,10 +99,10 @@ function dragElement(elmnt: DraggableElement) {
 
 	const doc = document.getElementById("floating-card") as HTMLElement;
 	if (!doc) return;
-	const containerRect = container.getBoundingClientRect();
-	const docRect = doc.getBoundingClientRect();
-	elmnt.style.top = (containerRect.height / 2) - (docRect.height / 2) + "px";
-	elmnt.style.left = (containerRect.width / 2) - (docRect.width / 2) + "px";
+	// const containerRect = container.getBoundingClientRect();
+	// const docRect = doc.getBoundingClientRect();
+	// elmnt.style.top = (containerRect.height / 2) - (docRect.height / 2) + "px";
+	// elmnt.style.left = (containerRect.width / 2) - (docRect.width / 2) + "px";
 
 	function dragMouseDown(e: DragEvent) {
 		e = e || window.event as DragEvent;
@@ -194,8 +195,8 @@ function dragElement(elmnt: DraggableElement) {
 	overflow: hidden;
 	padding: 30px;
 
-	top: 0;
-
+	top: 20%;
+	left: 10%
 }
 
 #floating-card-header {

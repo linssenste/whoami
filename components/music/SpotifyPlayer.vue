@@ -2,7 +2,7 @@
 	<div class="music-player" :id="playerId">
 
 		<iframe ref="spotifyIframe" sandbox="allow-scripts" :src="iframeSrc" allow="fullscreen; autoplay"
-				allowfullscreen title="music player" height="152" frameborder="0" tabindex="-1"></iframe>
+				allowfullscreen title="spotify embed music player" height="152" frameborder="0" tabindex="-1"></iframe>
 	</div>
 
 </template>

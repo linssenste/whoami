@@ -1,6 +1,6 @@
 <template>
 	<transition name="fade">
-		<div v-show="showButton" aria-label="Scroll to top button" @click="scrollToTop" class="jump-button">
+		<div v-show="showButton" title="Scroll to top button" @click="scrollToTop" class="jump-button">
 			<ChevronArrowIcon :size="10" :rotation="90" color="#505050" />
 		</div>
 	</transition>
