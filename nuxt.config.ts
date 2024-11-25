@@ -1,21 +1,25 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   nitro: {
     compressPublicAssets: true,
     prerender: {
         crawlLinks: true
       }
   },
+
   plugins: [
     '~/plugins/random-favicon.client.ts'
   ],
+
   components: [
     // Auto-import components in the components directory
     { path: '~/components', pathPrefix: true },
     // Auto-import components in the sections directory
     { path: '~/sections', pathPrefix: false },
   ],
+
   app: {
     head: {
       script: [
@@ -26,7 +30,9 @@ export default defineNuxtConfig({
       ]
     }
   },
+
   modules: ['nuxt-lazy-load', '@nuxtjs/leaflet', '@pinia/nuxt'],
+
   lazyLoad: {
     // These are the default values
     images: false,
@@ -37,5 +43,6 @@ export default defineNuxtConfig({
     directiveOnly: true,
   },
 
-  css: ['~/assets/css/main.css', '~/assets/font/buttons/stylesheet.css', '~/assets/font/biro/stylesheet.css', '~/assets/font/text/stylesheet.css']
+  css: ['~/assets/css/main.css', '~/assets/font/buttons/stylesheet.css', '~/assets/font/biro/stylesheet.css', '~/assets/font/text/stylesheet.css'],
+  compatibilityDate: '2024-11-20'
 })
