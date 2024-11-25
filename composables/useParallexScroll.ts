@@ -5,36 +5,36 @@ export const useParallaxScroll = (docId: string, speed: number, scrollDirection 
 	  const refDoc = document.getElementById(docId);
 	  if (!refDoc) return;
   
-	  const currentScrollY = window.scrollY;
+	  const rect = refDoc.getBoundingClientRect();
+	  const parallaxSpeed = speed;
+  
+	  // Compute the translation based on the difference between current scroll position and initial offset
 	  const translateY =
-		((currentScrollY - initialOffsetTop) * speed * (scrollDirection ? 1 : -1));
+		((rect.top - initialOffsetTop) * parallaxSpeed * (scrollDirection ? 1 : -1));
   
 	  // Apply the parallax effect
 	  refDoc.style.transform = `translateY(${translateY}px)`;
 	};
+	
   
 	const calculateInitialOffset = () => {
 	  const doc = document.getElementById(docId);
 	  if (!doc) return;
   
-	  // Calculate the element's top position relative to the viewport, plus the current scroll position
-	  initialOffsetTop = doc.getBoundingClientRect().top + window.scrollY;
-  
-	  // Reset the transform so it doesn't start offset
+	  // Store the top position relative to the document
+	  initialOffsetTop = window.scrollY + doc.getBoundingClientRect().top;
+
+	  // Set initial translateY to 0
 	  doc.style.transform = `translateY(0px)`;
 	};
   
 	onMounted(() => {
-	  // Use requestAnimationFrame to ensure the DOM is fully painted before calculations
-	  requestAnimationFrame(() => {
-		calculateInitialOffset(); // Calculate initial offset
-		handleScroll(); // Apply an initial correction
-		window.addEventListener('scroll', handleScroll); // Listen to scroll events
-	  });
+	  calculateInitialOffset(); // Calculate initial offset on mount
+	  window.addEventListener('scroll', handleScroll); // Start listening to scroll events
 	});
   
 	onUnmounted(() => {
-	  window.removeEventListener('scroll', handleScroll); // Clean up
+	  window.removeEventListener('scroll', handleScroll); // Clean up the scroll event listener
 	});
   
 	return { handleScroll };

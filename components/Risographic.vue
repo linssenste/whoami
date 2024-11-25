@@ -1,7 +1,7 @@
 <template>
-	<div class="art-image-container" :id="`risographic-image-${section}`">
-		<img data-not-lazy data-testid="risograph-image" height="100%" fetchpriority="high" preload preconnect
-			 alt="colorful rounded forms in risographic style with the letter S and L in the center"
+	<div class="art-image-container" :id="`risographic-image-${section}${fixed ? '-fix' : ''}`">
+		<img draggable="false" data-not-lazy data-testid="risograph-image" height="100%" fetchpriority="high" preload
+			 preconnect alt="colorful rounded forms in risographic style with the letter S and L in the center"
 			 src="../assets/images/risograph.svg" class="art-image" />
 	</div>
 </template>
@@ -10,6 +10,7 @@
 const props = defineProps<{
 	section: string;
 	inverse?: boolean;
+	fixed?: boolean;
 }>();
 props.section;
 props.inverse;
