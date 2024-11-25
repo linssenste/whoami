@@ -47,12 +47,13 @@ function toggleGallery() {
 
 const shufflePolaroids = (): PolaroidCard[] => {
 	let polaroids: PolaroidCard[] = [
-		{ src: '/polaroids/polaroid-1.webp', alt: 'moin' },
-		{ src: '/polaroids/polaroid-2.webp', alt: 'moin' },
-		{ src: '/polaroids/polaroid-3.webp', alt: 'moin' },
-		{ src: '/polaroids/polaroid-4.webp', alt: 'moin' },
-		{ src: '/polaroids/polaroid-5.webp', alt: 'moin' },
-		{ src: '/polaroids/polaroid-6.webp', alt: 'moin' },
+		{ src: '/polaroids/intro/polaroid-1.webp', alt: 'moin' },
+		{ src: '/polaroids/intro/polaroid-5.webp', alt: 'moin' },
+
+		{ src: '/polaroids/intro/polaroid-6.webp', alt: 'moin' },
+		{ src: '/polaroids/intro/polaroid-3.webp', alt: 'moin' },
+		{ src: '/polaroids/intro/polaroid-4.webp', alt: 'moin' },
+		{ src: '/polaroids/intro/polaroid-2.webp', alt: 'moin' },
 	];
 
 	// Shuffle all but the last element
