@@ -11,18 +11,18 @@
 						welcomeName }}</span>!
 					</span>
 					<p>
-						My name is Steffen, and I am a front-end developer with a passion for sleek UI & UX. My work is
-						driven by a deep interest for both technology and design, complemented by my enthusiasm for
-						music. I
-						may not be a virtuoso, but the world of melodies deeply influences and inspires my creative
-						process.
+
+						My name is Steffen and I am a front-end developer with a passion for elegant UI & UX. My work is
+						driven by an interest in both technology and design.
+
 					</p>
-					<p>This website is more than just a portfolio of my technical skills and creative endeavours. It's a
-						window into my personal world. Here you'll find a series of Polaroid images that offer glimpses
-						into
-						my daily life, share insights into my journey with disability, and reveal my deep connection to
-						music. Together, these elements are a reflection of the many aspects of my life and passions.
+					<p>
+						This website serves as a more personal and engaging way to introduce myself, going beyond
+						traditional application documents. It's also a demonstration of my expertise in modern web
+						development, showing my skills in action.
 					</p>
+
+
 
 					<!-- slide-hover button to open gallery with polaroids -->
 					<!-- <Button @click="toggleGallery" color="black" text="Show Gallery" class="gallery-button" /> -->
