@@ -1,5 +1,5 @@
 <template>
-	<div class="inclusion-section">
+	<div id="inclusion-section">
 		<InclusionRainbowHeader />
 
 		<div class="content">
@@ -33,8 +33,8 @@
 
 				<iframe style="border-radius:12px"
 						src="https://open.spotify.com/embed/episode/37APGyNAhgVwrTJZFxY56s?utm_source=generator&t=95"
-						width="100%" height="152" frameBorder="0" allowfullscreen=""
-						allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+						width="100%" height="152" frameBorder="0"
+						allow=" autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 						loading="lazy"></iframe>
 			</div>
 		</div>
@@ -53,18 +53,17 @@ const store = useStore();
 
 onMounted(() => {
 	window.focus()
+	window.addEventListener("blur", () => {
+		const activeElement = document.activeElement as HTMLIFrameElement;
+		if (activeElement.tagName === "IFRAME" && !activeElement.src.includes("instax")) {
+			store.setPlayStatus(false);
+		}
 
-	document.addEventListener("blur", () => {
-		setTimeout(() => {
-			if (document.activeElement.tagName === "IFRAME") {
-				store.setPlayStatus(false);
-			}
-		});
 	});
 })
 </script>
 <style scoped>
-.inclusion-section {
+#inclusion-section {
 	position: relative;
 	display: flex;
 	flex-direction: column;
