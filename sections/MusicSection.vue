@@ -30,7 +30,7 @@ const { isMobile } = useDeviceDetection();
 
 
 .album-banner {
-	margin-top: -200px !important;
+	margin-top: -350px !important;
 	z-index: 2
 }
 </style>
