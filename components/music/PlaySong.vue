@@ -35,10 +35,9 @@ const props = defineProps<{
 	song: {
 		cover: string;
 		id: string;
-		name: string;
-		artists: { name: string; id: string }[];
-		release: string;
-		track: string;
+		artist: string;
+		trackName: string;
+		trackId: string;
 	}
 }>()
 
