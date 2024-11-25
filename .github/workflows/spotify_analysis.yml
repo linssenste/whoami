@@ -3,14 +3,14 @@ name: Spotify analysis
 on:
   push:
     paths:
-      - ".github/workflows/spotify_analysis.ipynb" 
+      - ".github/workflows/spotify_analysis.yml"
+      - "assets/analysis/spotify.ipynb"
   schedule:
-    - cron: "0 0 * * *" 
+    - cron: "0 0 * * *"
 
 jobs:
   run-notebook:
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: "3.9" # Adjust this to match the Python version you use
+          python-version: "3.9"
 
       - name: Install dependencies
         run: |
@@ -37,8 +37,5 @@ jobs:
         run: |
           git config --global user.name '${{ github.actor }}'
           git config --global user.email '${{ github.actor }}@users.noreply.github.com'
-          git add assets/analysis/export-spotify-covers.json assets/analysis/export-spotify-analysis.json  # Add the JSON file at the specified path
-          git status  # Optional, for debugging to see what changes are being committed
-          git commit -m "[update] Updated jupyter notebook + output" || echo "No changes to commit"
-		  git pull --rebase
-          git push
+          git add assets/analysis/export-spotify-covers.json assets/analysis/export-spotify-analysis.json
+          git st
