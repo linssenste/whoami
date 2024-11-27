@@ -37,8 +37,8 @@ jobs:
         run: |
           git config --global user.name '${{ github.actor }}'
           git config --global user.email '${{ github.actor }}@users.noreply.github.com'
-          git add assets/analysis/export-spotify-covers.json assets/analysis/export-spotify-analysis.json
+          git add assets/analysis/export-spotify-covers.json assets/analysis/export-spotify-analysis.json assets/analysis/spotify.ipynb
           git status
-          git commit -m "[update] Updated jupyter notebook + output" || echo "No changes to commit"
+          git commit -m "[update] Updated spotify analysis output" || echo "No changes to commit"
           git pull --rebase
           git push
