@@ -85,7 +85,7 @@ const travelImages = visitedCountries.map((countryId) => {
 
 	// Generate the image object with the path and id
 	return {
-		src: `/polaroids/travel/${countryId}.webp`,
+		src: `/polaroids/travel/travel-${countryId}.webp`,
 		alt: '',
 		id: countryId
 	};
