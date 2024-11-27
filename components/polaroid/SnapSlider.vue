@@ -8,7 +8,7 @@
 			<!-- polaroid gallery -->
 			<div v-for="(card, index) in polaroids" :id="`${index}-image`" class="image-element"
 				 :class="{ focused: selectedIndex === index }">
-				<PolaroidImage :src="card.src" :alt="card.alt" :id="`polaroid-${index}`"
+				<PolaroidImage v-lazy-load :src="card.src" :alt="card.alt" :id="`polaroid-${index}`"
 							   v-on:click="nextPolaroidImage(index - selectedIndex)" />
 			</div>
 
