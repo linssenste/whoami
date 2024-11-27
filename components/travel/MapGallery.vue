@@ -63,6 +63,7 @@ const countriesNames: { [key: string]: string } = {
 	"HU": "Hungary",
 	"AT": "Austria",
 	"SI": "Slovenia",
+	"SK": "Slovakia",
 	"HR": "Croatia",
 	"IT": "Italy",
 	"DK": "Denmark",
