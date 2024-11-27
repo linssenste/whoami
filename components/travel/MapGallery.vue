@@ -54,11 +54,6 @@ const sliderRef = ref(null)
 
 const { isMobile } = useDeviceDetection();
 
-// useParrallexScroll('country-map', 0.05);
-// useParrallexScroll('country-images', 0.05, false);
-
-
-
 const visitedCountries = ["INTRO", "BE", "NL", "DE", "HU", "SK", "AT", "SI", "HR", "IT", "DK", "SE", "NO", "CZ", "PL", "LT", "LV", "EE", "FI"];
 
 const countriesNames: { [key: string]: string } = {
@@ -85,8 +80,8 @@ const travelImages = visitedCountries.map((countryId) => {
 
 	// Generate the image object with the path and id
 	return {
-		src: `/polaroids/travel/travel-${countryId}.webp`,
-		alt: '',
+		src: `/polaroids/travel/travel-${countryId.toLowerCase()}.webp`,
+		alt: `Country ${countryId}`,
 		id: countryId
 	};
 });
