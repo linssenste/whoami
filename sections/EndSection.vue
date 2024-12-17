@@ -47,7 +47,6 @@
 					<!-- bottom links -->
 					<div class="bottom-links">
 						<a href="/imprint" target="_blank">IMPRESSUM</a>
-						<a href="/centering-div" target="_blank">HOW TO CENTER A DIV</a>
 					</div>
 				</div>
 			</div>
