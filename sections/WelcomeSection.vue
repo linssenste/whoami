@@ -12,20 +12,14 @@
 					</span>
 					<p>
 
-						My name is Steffen and I am a front-end developer with a passion for elegant UI & UX. My work is
-						driven by an interest in both technology and design.
-
+						My name is Steffen, and I am a software engineer passionate about creating innovative,
+						user-friendly applications. I combine elegant design with reliable functionality to deliver
+						intuitive and robust solutions.
 					</p>
-					<p>
-						This website serves as a more personal and engaging way to introduce myself, going beyond
-						traditional application documents. It's also a demonstration of my expertise in modern web
-						development, showing my skills in action.
+					<p>This website offers a more personal and engaging way to introduce myself, complementing
+						traditional application documents. It also serves as a showcase of my skills in designing and
+						developing modern, functional applications.
 					</p>
-
-
-
-					<!-- slide-hover button to open gallery with polaroids -->
-					<!-- <Button @click="toggleGallery" color="black" text="Show Gallery" class="gallery-button" /> -->
 				</div>
 			</template>
 		</PolaroidExpandableStack>
