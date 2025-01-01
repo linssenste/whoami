@@ -69,11 +69,11 @@ const secondFavorite = computed(() => Object.values(props.data.artists)[1]);
 const favoriteGenres = computed(() => Object.keys(props.data.genres.general));
 
 // Pass a function that returns the value of props.step === 2
-useAnnotate('text-2', () => props.step == 3, 'underline', (Math.random() * 250));
-useAnnotate('text-3', () => props.step == 4, 'underline', (Math.random() * 250));
-useAnnotate('text-4', () => props.step == 5, 'underline', (Math.random() * 250));
-useAnnotate('text-5', () => props.step == 6, 'underline', (Math.random() * 250));
-useAnnotate('text-7', () => props.step == 8, 'underline', (Math.random() * 250));
+useAnnotate('text-2', () => props.step == 2, 'underline', (Math.random() * 250));
+useAnnotate('text-3', () => props.step == 3, 'underline', (Math.random() * 250));
+useAnnotate('text-4', () => props.step == 4, 'underline', (Math.random() * 250));
+useAnnotate('text-5', () => props.step == 5, 'underline', (Math.random() * 250));
+useAnnotate('text-7', () => props.step == 6, 'underline', (Math.random() * 250));
 
 
 
